@@ -1,0 +1,14 @@
+{
+  "_output_dir": "/Users/pauleveritt/projects/pauleveritt/antidote",
+  "_template": "gh:cjolowicz/cookiecutter-hypermodern-python",
+  "author": "Paul Everitt",
+  "copyright_year": "2022",
+  "development_status": "Development Status :: 1 - Planning",
+  "email": "pauleveritt@me.com",
+  "friendly_name": "The Antidote Book",
+  "github_user": "pauleveritt",
+  "license": "MIT",
+  "package_name": "antidote_book",
+  "project_name": "antidote-book",
+  "version": "0.0.0"
+}
