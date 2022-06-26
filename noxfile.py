@@ -227,7 +227,7 @@ def docs_build(session: Session) -> None:
 @session(python=python_versions[0])
 def docs(session: Session) -> None:
     """Build and serve the documentation with live reloading on file changes."""
-    args = session.posargs or ["--open-browser", "docs", "docs/_build"]
+    args = session.posargs or ["docs", "docs/_build"]
     session.install(".")
     session.install("sphinx", "sphinx-autobuild", "sphinx-click", "furo", "myst-parser")
 

@@ -14,6 +14,8 @@ hidden:
 maxdepth: 1
 ---
 
+introduction
+basic_pluggable/index
 usage
 reference
 contributing

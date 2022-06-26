@@ -1,4 +1,4 @@
-# The Antidote Book
+# Pluggable Apps with Antidote
 
 [![PyPI](https://img.shields.io/pypi/v/antidote-book.svg)][pypi_]
 [![Status](https://img.shields.io/pypi/status/antidote-book.svg)][status]
@@ -21,13 +21,11 @@
 [pre-commit]: https://github.com/pre-commit/pre-commit
 [black]: https://github.com/psf/black
 
-## Features
+Welcome to "Pluggable Apps with Antidote".
+This project is two things:
 
-- TODO
-
-## Requirements
-
-- TODO
+- A hands-on book showing an opinionated usage of Antidote
+- Installable code you can use to download, execute, and tinker with
 
 ## Installation
 
