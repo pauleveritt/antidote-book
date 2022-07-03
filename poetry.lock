@@ -791,6 +791,27 @@ tomli = ">=1.0.0"
 testing = ["argcomplete", "hypothesis (>=3.56)", "mock", "nose", "pygments (>=2.7.2)", "requests", "xmlschema"]
 
 [[package]]
+name = "pytest-mypy"
+version = "0.9.1"
+description = "Mypy static type checker plugin for Pytest"
+category = "dev"
+optional = false
+python-versions = ">=3.5"
+
+[package.dependencies]
+attrs = ">=19.0"
+filelock = ">=3.0"
+mypy = [
+    {version = ">=0.500", markers = "python_version < \"3.8\""},
+    {version = ">=0.700", markers = "python_version >= \"3.8\" and python_version < \"3.9\""},
+    {version = ">=0.780", markers = "python_version >= \"3.9\""},
+]
+pytest = [
+    {version = ">=6.2", markers = "python_version >= \"3.10\""},
+    {version = ">=4.6", markers = "python_version >= \"3.6\" and python_version < \"3.10\""},
+]
+
+[[package]]
 name = "pytz"
 version = "2022.1"
 description = "World timezone definitions, modern and historical"
@@ -1207,7 +1228,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "49ec0af51eae29cc7fd483d1b480fc06cdf23154fed616e12445f8769db5e286"
+content-hash = "3ca2e4a3fe2a9aef6d7028f92a6c22b9369ff7efc1791a8e3f665e679875e104"
 
 [metadata.files]
 alabaster = [
@@ -1616,6 +1637,10 @@ pyparsing = [
 pytest = [
     {file = "pytest-7.1.2-py3-none-any.whl", hash = "sha256:13d0e3ccfc2b6e26be000cb6568c832ba67ba32e719443bfe725814d3c42433c"},
     {file = "pytest-7.1.2.tar.gz", hash = "sha256:a06a0425453864a270bc45e71f783330a7428defb4230fb5e6a731fde06ecd45"},
+]
+pytest-mypy = [
+    {file = "pytest-mypy-0.9.1.tar.gz", hash = "sha256:9ffa3bf405c12c5c6be9e92e22bebb6ab2c91b9c32f45b0f0c93af473269ab5c"},
+    {file = "pytest_mypy-0.9.1-py3-none-any.whl", hash = "sha256:a2505fcf61f1c0c51f950d4623ea8ca2daf6fb2101a5603554bad2e130202083"},
 ]
 pytz = [
     {file = "pytz-2022.1-py2.py3-none-any.whl", hash = "sha256:e68985985296d9a66a881eb3193b0906246245294a881e7c8afe623866ac6a5c"},
