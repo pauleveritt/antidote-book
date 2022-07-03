@@ -1,0 +1,1 @@
+# Faster Results with Singletons
