@@ -7,18 +7,24 @@ from antidote import world, injectable
 
 @injectable
 class Greeter:
-    salutation: str = "Hello"
+    """A person that gives a greeting."""
+
+    salutation: str
+
+    def __init__(self, salutation: str = "Hello"):
+        """Construct a ``Greeter``."""
+        self.salutation = salutation
 
 
 def greeting() -> str:
     """Get a `Greeter` and return a greeting."""
     greeter = world.get(Greeter)
-    return f'{greeter.salutation}!'
+    return f"{greeter.salutation}!"
 
 
 def main() -> str:
     return greeting()
 
 
-def test() -> tuple[str, str]:
-    return main(), "Hello!"
+if __name__ == "__main__":
+    print(main())

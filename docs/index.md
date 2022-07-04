@@ -5,8 +5,6 @@ end-before: <!-- github-only -->
 ```
 
 [license]: license
-[contributor guide]: contributing
-[command-line reference]: usage
 
 ```{toctree}
 ---
@@ -15,11 +13,11 @@ maxdepth: 1
 ---
 
 introduction
-basic_pluggable/index
-usage
-reference
-contributing
-Code of Conduct <codeofconduct>
+getting_started/index
+pluggable_app/index
+extending/index
+rendering_system/index
+ssg/index
 License <license>
 Changelog <https://github.com/pauleveritt/antidote-book/releases>
 ```

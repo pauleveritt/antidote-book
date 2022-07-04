@@ -22,7 +22,7 @@ antidote = "^1.4.2"
 
 [tool.poetry.dev-dependencies]
 Pygments = ">=2.10.0"
-black = ">=21.10b0"
+black = {extras = ["d"], version = "^22.6.0"}
 coverage = {extras = ["toml"], version = ">=6.2"}
 darglint = ">=1.8.1"
 flake8 = ">=4.0.1"
@@ -47,7 +47,6 @@ xdoctest = {extras = ["colors"], version = ">=0.15.10"}
 myst-parser = {version = ">=0.16.1"}
 nox = "^2022.1.7"
 nox-poetry = "^1.0.1"
-pytest-mypy = "^0.9.1"
 
 [tool.poetry.scripts]
 antidote-book = "antidote_book.__main__:main"
