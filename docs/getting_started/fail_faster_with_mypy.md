@@ -1,1 +1,0 @@
-# Fail Faster with `mypy`

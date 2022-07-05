@@ -17,10 +17,10 @@ def index(request):
 ```
 
 In this view function, `Question` is an object which the framework injected with superpowers.
-It knows how to get us the data we want. 
+It knows how to get us the data we want.
 
 Fortunately Antidote has one of those too: the {doc}`World <antidote:reference/world>` object.
-Let's see how we can use it in our function to *pull* in the object we need.
+Let's see how we can use it in our function to _pull_ in the object we need.
 
 ## The Greeting Gets the Greeter
 
@@ -34,7 +34,7 @@ end-at: return f
 ---
 ```
 
-Two lines but lots going on. 
+Two lines but lots going on.
 First, what is `world`?
 Think of it both as registry and a tool that can create instances.
 It's a module with functions like `get`, but it's also stateful.
@@ -75,7 +75,7 @@ In computer terms, it registers a "factory": something that can make a `Greeter`
 The `world` will do one more thing, though.
 By default, Antidote registers injectables as "singletons".
 This means the `world` will remember the constructed instance.
-The next time something asks the `world` for a `Greeter`, it will *skip* construction and return the instance.
+The next time something asks the `world` for a `Greeter`, it will _skip_ construction and return the instance.
 
 If you're using a smart editor, you'll get autocomplete all the way through.
 If you're using a type checker, you'll get no warnings -- all is good in the `world`.
@@ -101,7 +101,7 @@ end-at: "assert actual"
 ```
 
 The unit test for the `greeter` function though is different.
-It has to get an *isolated* `world`.
+It has to get an _isolated_ `world`.
 Fortunately Antidote makes it easy with `world.test.clone` and `world.test.override.singleton`:
 
 ```{literalinclude} ../../tests/test_manual_lookup.py
@@ -120,7 +120,7 @@ We're going to tackle that in the next chapter.
 
 Yes. But.
 
-As we'll see in the coming chapters, you don't always want *that* `Greeter`.
+As we'll see in the coming chapters, you don't always want _that_ `Greeter`.
 You might need "the system" to select the "best" `Greeter`.
 You might want "the system" to help construct the `Greeter`, using other information it knows about.
 In fact, you might want "the system" to call your `greeting` function.

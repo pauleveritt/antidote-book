@@ -1,9 +1,7 @@
 {
   "browser": "firefox",
   "open": false,
-  "files": [
-    "docs/_build/**/*"
-  ],
+  "files": ["docs/_build/**/*"],
   "server": {
     "baseDir": "docs/_build"
   }

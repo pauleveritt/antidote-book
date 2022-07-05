@@ -1,7 +1,7 @@
 # A Pluggable App
 
-- Software layout: site.py, framework/*, plugins/*/*
-- Re-organize into thin core with plugins for built-ins as framework/plugins/*/*
+- Software layout: site.py, framework/_, plugins/_/\*
+- Re-organize into thin core with plugins for built-ins as framework/plugins/_/_
 - Custom creation with factory callables
 - Replaceable parts with `@interface`
 - Replacing a built-in with `@override`

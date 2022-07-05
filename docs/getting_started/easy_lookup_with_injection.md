@@ -1,7 +1,7 @@
 # Easy Lookup with Injection
 
 Our `greeting` function was able to ask the `world` for a `Greeter`.
-Let's take this out of our function body and get Antidote to *inject* our `Greeter`.
+Let's take this out of our function body and get Antidote to _inject_ our `Greeter`.
 
 ## Using `world` Directly is a Code Smell
 
@@ -15,15 +15,15 @@ emphasize-lines: 3
 ---
 ```
 
-It works but...*no bueno*.
-Instead, we want to use *injection*.
+It works but..._no bueno_.
+Instead, we want to use _injection_.
 As Antidote covers in its {doc}`Tutorial Introduction <antidote:tutorial/1_introduction>`:
 
 :::{admonition} Use Injection
 :class: note
 
-Prefer using `inject()` to `world.get`. 
-`greeting` does not rely on dependency injection making it harder to test! 
+Prefer using `inject()` to `world.get`.
+`greeting` does not rely on dependency injection making it harder to test!
 `.inject` is also considerably faster thanks to heavily tuned cython code.
 :::
 
@@ -32,7 +32,7 @@ It also eases our later goal of replaceability: the signature tells us its conne
 
 ## Inject My `Greeter`
 
-Instead, we'll use Antidote's *injector* to do the work of `world.get(Greeter)`:
+Instead, we'll use Antidote's _injector_ to do the work of `world.get(Greeter)`:
 
 ```{literalinclude} ../../src/antidote_book/easy_injection/__init__.py
 ---
@@ -41,7 +41,7 @@ end-at: return f
 ---
 ```
 
-Instead, `greeting` stated its *dependencies* in its function parameters.
+Instead, `greeting` stated its _dependencies_ in its function parameters.
 It needs a `Greeter` and asked "the system" to go get one.
 
 Nothing changes with the `Greeter` or its "registration" as an injectable:
@@ -99,7 +99,7 @@ def index(request):
 In this view function, `Question` is inside the function.
 This means it has to be mocked in some way.
 In the previous chapter, we had to do that also, with `world.test.clone` and `world.test.override.singleton`.
-But thanks to injection, we can just *pass in* our dependency, which makes the test code super simple:
+But thanks to injection, we can just _pass in_ our dependency, which makes the test code super simple:
 
 ```{literalinclude} ../../tests/test_easy_injection.py
 ---
@@ -110,7 +110,7 @@ end-at: 'assert actual == "From Test!"'
 
 In summary: our function had a dependency, and we asked for it to be injected.
 The caller (our test) was decoupled from the callee (`greeting`.)
-You can thus *extend* a system without forking either side.
+You can thus _extend_ a system without forking either side.
 
 ## Download Files
 

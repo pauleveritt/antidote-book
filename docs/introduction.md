@@ -9,13 +9,13 @@ What if there was a way to build modular, extensible -- pluggable! -- applicatio
 
 This usually means a lot of ceremony.
 We're not here to write Java!
-But as new frameworks such as FastAPI have shown, you *can* get people to do type hinting and dependency injection, if:
+But as new frameworks such as FastAPI have shown, you _can_ get people to do type hinting and dependency injection, if:
 
 - The barrier is low
 - The payoff is high
 
 What if there was a general-purpose framework that helped you write your own pluggable application?
-One that also had a low barrier and high payoff, but also -- some *very* interesting possibilities.
+One that also had a low barrier and high payoff, but also -- some _very_ interesting possibilities.
 
 Welcome to Antidote, a modern, fast, well-supported package for dependency injection and more.
 
@@ -24,7 +24,7 @@ Welcome to Antidote, a modern, fast, well-supported package for dependency injec
 What is a "pluggable app" and why should I care?
 It's a topic I have a long interest in (Zope, Plone, Pyramid), so let's make the case.
 
-Sometimes you have a "library"...a package where *you* call *it*.
+Sometimes you have a "library"...a package where _you_ call _it_.
 For example, `urllib3` "is a powerful, user-friendly HTTP client for Python."
 
 Sometimes you have a "framework"...a package that calls you.
@@ -37,16 +37,16 @@ You have write your "app".
 But you don't distribute it as a PyPI package for others -- it's just meant for your needs.
 At most, you publish your repo, with a `requirements.txt` that helps install the app.
 
-But what if you *could* ship something that worked OOTB, but was extensible enough to turn from "their app" into "your app"?
+But what if you _could_ ship something that worked OOTB, but was extensible enough to turn from "their app" into "your app"?
 This is the history I come from with Zope and Plone.
 A ready-to-use app with well-defined plug-points, providing a rich ecosystem of quality plugins.
 It's also true that Django, with its admin UI, has some of this OOTB experience as well.
 
 But what if you wanted to make your own Django?
 You need a framework-framework.
-This is what Pyramid provided -- a *magnificent* web framework that was extensible in very, very rich ways.
+This is what Pyramid provided -- a _magnificent_ web framework that was extensible in very, very rich ways.
 In fact, this book looks at Antidote largely as a Pyramid old-timer.
-Seeing the same patterns, but outside a web-only usage, and teleported into a modern Python context. 
+Seeing the same patterns, but outside a web-only usage, and teleported into a modern Python context.
 
 ## Benefits of Pluggable Apps
 
@@ -64,14 +64,14 @@ It just so happens that you've written all of that ready-to-go functionality as 
 ### Add/Replace Functionality
 
 Let's look at pluggability.
-The first and simplest way: *adding* something to the app.
+The first and simplest way: _adding_ something to the app.
 
 You've seen this: adding a view to Flask, adding a model to Django, adding a template to Sphinx, adding a plugin in pytest.
 Pretty straightforward.
 
 The second kind of pluggability is tougher: replacing something that's built-in.
 It's tougher: the framework needs to anticipate that a different implementation will be used by anything calling that feature.
-And this replacement implementation is *unknown to the framework author* until runtime in somebody's site.
+And this replacement implementation is _unknown to the framework author_ until runtime in somebody's site.
 
 When this is supported, it can be kind of clunky, for several reasons:
 
@@ -93,13 +93,13 @@ Flask lets you register [different views for HTTP methods](https://flask.pallets
 Meaning, you get a few limited, built-in ways to vary a few built-in things.
 
 But what if you wanted more ways -- and more *powerful ways -- to vary?
-What if you wanted register your *own* ways to vary?
+What if you wanted register your *own\* ways to vary?
 Pyramid really pioneered this with its {term}`pyramid:predicate` concept.
 In Pyramid, predicates apply to many places where you want to go find something -- a view, a route, a subscriber, etc.
 This is part of what makes Pyramid shine as a framework-framework.
 
 But there's a step beyond even this.
-What if you want to register your *own kinds of things*?
+What if you want to register your _own kinds of things_?
 Maybe your pluggable app has nothing to do with views, routes, and subscribers.
 It doesn't even deal with the web.
 
@@ -124,19 +124,24 @@ TODO Finish
 - Caller-callee decoupling
 - Smaller surface area
 - Tracking, caching, rebuild
-  
+
 ## Setup
-  - 
-Python version
+
+- Python version
+- Poetry
+- pytest and mypy
+  - coverage?
 
 ## About This Book
 
 - How to use this book
+
   - Install
   - Run
 
 - Executable install
-- 
+-
+
 ## Sample App: `MegaStore`
 
 Let's learn Antidote by gradually writing a pluggable application.

@@ -1,6 +1,6 @@
 # Getting Started with Antidote
 
-"Pluggable app," you might say. 
+"Pluggable app," you might say.
 "Sounds big scary!"
 
 Antidote is actually easy to, shall we say, ease into.
@@ -15,8 +15,7 @@ maxdepth: 1
 
 getting_a_dependency_manually
 easy_lookup_with_injection
-fail_faster_with_mypy
-faster_dev_with_testing
+faster_dev_with_tooling
 different_spellings_for_injection
 working_with_the_world
 faster_results_with_singletons

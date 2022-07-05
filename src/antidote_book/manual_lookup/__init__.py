@@ -2,7 +2,8 @@
 
 We have a `greeting` function that needs a `Greeter`.
 """
-from antidote import world, injectable
+from antidote import injectable
+from antidote import world
 
 
 @injectable
@@ -23,6 +24,7 @@ def greeting() -> str:
 
 
 def main() -> str:
+    """Process a greeting."""
     return greeting()
 
 

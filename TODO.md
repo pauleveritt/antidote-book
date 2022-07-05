@@ -24,4 +24,3 @@
 
 - Organize outline
 - Decide on the `main` and `test` function ideas
-

@@ -1,4 +1,11 @@
-from antidote import inject, injectable
+"""Get dependency through injection.
+
+In the previous example we manually retrieved our ``Greeter`` from the
+``world``. In this example we state our dependency in our function
+parameters and ask Antidote to retrieve it for us.
+"""
+from antidote import inject
+from antidote import injectable
 
 
 @injectable
@@ -21,3 +28,7 @@ def greeting(greeter: Greeter = inject.me()) -> str:
 def main() -> str:
     """Process a greeting."""
     return greeting()
+
+
+if __name__ == "__main__":
+    print(main())
