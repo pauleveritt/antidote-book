@@ -16,7 +16,7 @@ maxdepth: 1
 getting_a_dependency_manually
 easy_lookup_with_injection
 faster_dev_with_tooling
-different_spellings_for_injection
+using_dataclasses
 working_with_the_world
 faster_results_with_singletons
 configuration_with_constants
