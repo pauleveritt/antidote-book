@@ -1,8 +1,8 @@
-"""Do the shallow and deep tests for the easy_injection example."""
+"""Do the shallow and deep tests for the using_dataclasses example."""
 
-from antidote_book.easy_injection import Greeter
-from antidote_book.easy_injection import greeting
-from antidote_book.easy_injection import main
+from antidote_book.using_dataclasses import Greeter
+from antidote_book.using_dataclasses import greeting
+from antidote_book.using_dataclasses import main
 
 
 def test_shallow() -> None:

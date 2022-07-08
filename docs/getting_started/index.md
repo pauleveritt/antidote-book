@@ -17,8 +17,7 @@ getting_a_dependency_manually
 easy_lookup_with_injection
 faster_dev_with_tooling
 using_dataclasses
-working_with_the_world
-faster_results_with_singletons
+dynamic_results_without_singletons
 configuration_with_constants
 chained_injection
 outside_code_with_lazy
