@@ -18,8 +18,7 @@ end-at: return f
 ---
 ```
 
-:::{admonition} Local Variables
-:class: note
+:::{note} Local Variables
 
 The local variables are only there to shorten the line for the f-string.
 :::

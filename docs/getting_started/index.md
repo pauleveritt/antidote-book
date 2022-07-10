@@ -22,5 +22,5 @@ configuration_with_constants
 chained_injection
 outside_code_with_lazy
 customized_construction
-debugging_antidote_apps
+stateful_factories
 ```

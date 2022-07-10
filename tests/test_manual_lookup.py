@@ -32,7 +32,7 @@ def test_world_setup() -> None:
 
 
 class DummyGreeter:
-    """A fake for the greeter."""
+    """A fake for the config."""
 
     salutation: str
 

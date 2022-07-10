@@ -19,8 +19,7 @@ It works but..._no bueno_.
 Instead, we want to use _injection_.
 As Antidote covers in its {doc}`Tutorial Introduction <antidote:tutorial/1_introduction>`:
 
-:::{admonition} Use Injection
-:class: note
+:::{note} Use Injection
 
 Prefer using `inject()` to `world.get`.
 `greeting` does not rely on dependency injection making it harder to test!
