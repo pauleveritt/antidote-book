@@ -15,6 +15,7 @@
 - Consider mixing in some doctest
 - Setup api docs and make good docstrings
 - In singletons, introduce debugger to prove it only runs once
+- In first usage of `world.get[Something](Something)` clarify the double usage
 
 ## Later
 

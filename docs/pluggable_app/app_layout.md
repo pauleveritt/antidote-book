@@ -10,9 +10,9 @@ The application itself is `MegaStore`, a chain of stores where customers receive
 `MegaStore` is an actual application: you can install it, run it, and get something.
 We call this "OOTB": out-of-the-box, it provides something useful.
 
-But it is a *pluggable* app.
+But it is a _pluggable_ app.
 The useful things that `MegaStore` does can be plugged into: Extended, Replaced, or Varied.
-We'll approach `MegaStore` as a *thin core* with common code that pulls everything together.
+We'll approach `MegaStore` as a _thin core_ with common code that pulls everything together.
 This thin core then ships with plugins for the out-of-the-box part.
 That way, the built-in stuff isn't "more equal" than an replacement parts.
 
@@ -29,14 +29,14 @@ It provides the web framework equivalent of processing an HTTP request: find a v
 In this case: find a `Greeting`, call it, and return a string.
 Since `get_greeting` has the `@inject` decorator, everything it needs is provided by plugins.
 
-Again, for this example, `megastore` is in a *subdirectory*.
+Again, for this example, `megastore` is in a _subdirectory_.
 In practice, it would be its own Python package, installed by `pip`.
 
 Let's look at the simulated-packages for each plugin.
 
 ## `Greeting` Plugin
 
-We just said the `MegaStore` core was thin, and -- yep -- it's *really* thin.
+We just said the `MegaStore` core was thin, and -- yep -- it's _really_ thin.
 All the work comes from plugins which the core looks up via Antidote.
 
 These plugins would normally be separate pip-installed packages.

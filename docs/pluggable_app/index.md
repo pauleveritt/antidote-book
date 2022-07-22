@@ -1,6 +1,6 @@
 # A Pluggable App
 
-Now that we've learned the basics of Antidote, let's learn the basics of *pluggable apps*.
+Now that we've learned the basics of Antidote, let's learn the basics of _pluggable apps_.
 In this section, we'll:
 
 - Change our directory layout to the "app", "plugin", "site" structure
@@ -37,5 +37,6 @@ maxdepth: 1
 ---
 
 app_layout
+interfaces
 debugging_antidote_apps
 ```

@@ -1,5 +1,6 @@
 """Sphinx configuration."""
 project = "Pluggable Apps with Antidote"
+html_title = "Pluggable Apps with Antidote"
 author = "Paul Everitt"
 copyright = "2022, Paul Everitt"
 extensions = [

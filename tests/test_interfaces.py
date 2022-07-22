@@ -1,12 +1,12 @@
-"""Do the shallow and deep tests for the app_layout example."""
+"""Do the shallow and deep tests for the interfaces example."""
 from antidote import inject
 from antidote import world
 
-from antidote_book.app_layout.megastore_plugins.config import MegaStoreConfig
-from antidote_book.app_layout.megastore_plugins.customer import Customer
-from antidote_book.app_layout.megastore_plugins.greeter import Greeter
-from antidote_book.app_layout.megastore_plugins.greeting import Greeting
-from antidote_book.app_layout.site import main
+from antidote_book.interfaces.megastore_plugins.config import MegaStoreConfig
+from antidote_book.interfaces.megastore_plugins.customer import Customer
+from antidote_book.interfaces.megastore_plugins.greeter import Greeter
+from antidote_book.interfaces.megastore_plugins.greeting import Greeting
+from antidote_book.interfaces.site import main
 
 
 def test_config() -> None:
