@@ -1,4 +1,5 @@
 """Do the shallow and deep tests for the interfaces example."""
+
 from antidote import inject
 from antidote import world
 
@@ -22,19 +23,19 @@ def test_config() -> None:
 
 def test_customer() -> None:
     """Ensure the world can make a ``Customer`` from dependencies."""
-    customer = world.get[Customer](Customer)
+    customer = world.get(Customer)
     assert customer.name == "Steve"
 
 
 def test_greeter() -> None:
     """Ensure the world can make a ``Greeter`` from dependencies."""
-    greeter = world.get[Greeter](Greeter)
+    greeter = world.get(Greeter)
     assert greeter.name == "Susie"
 
 
 def test_greeting() -> None:
     """Ensure the world can make a ``Greeting`` from dependencies."""
-    greeting = world.get[Greeting](Greeting)
+    greeting = world.get(Greeting)
     assert greeting.customer.name == "Steve"
     assert greeting.greeter.name == "Susie"
     assert greeting.punctuation == "!"
