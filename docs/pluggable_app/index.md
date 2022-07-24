@@ -18,11 +18,11 @@ As you go through these sections, keep in mind some of the tenets we're advocati
 Next
 
 - Varying lookup with qualifiers
-- debugging_antidote_apps
-- (new) Smaller surface areas with operators
 - Per-transaction data from scopes with injection from scope
-- Convenient plugs with decorators
+- debugging_antidote_apps
 - Best-match with predicates
+- Convenient plugs with decorators
+- (new) Smaller surface areas with operators
 - (MAYBE) Start refactoring as generic view/resource/request/response system
 
 ```{toctree}
@@ -36,5 +36,6 @@ interfaces
 protocols
 extend
 replace
+vary
 debugging_antidote_apps
 ```

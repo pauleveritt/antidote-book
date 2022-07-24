@@ -10,7 +10,7 @@ Everybody will just start getting the overridden one, without even knowing it wa
 # Replacing with `override`
 
 MegaStore has opened a store in Quebec, so the salutations in `DefaultSalutation.choices` should be in French.
-The *site* can override this without having to fork the built-in `DefaultSalutation` nor any callers.
+The _site_ can override this without having to fork the built-in `DefaultSalutation` nor any callers.
 
 We'll start, of course, with a failing test.
 Let's change `test_greeting` and `test_main` to use the French salutations:
@@ -44,9 +44,9 @@ Wrong!
 When we start up the application -- for example, by running our test -- we get an error from Antidote:
 
 ```
-RuntimeError: Multiple implementations match the interface 
-<class 'antidote_book.replace.megastore_plugins.salutation.Salutation'> for the constraints []: 
-<class 'antidote_book.replace.site.FrenchSalutation'> and 
+RuntimeError: Multiple implementations match the interface
+<class 'antidote_book.replace.megastore_plugins.salutation.Salutation'> for the constraints []:
+<class 'antidote_book.replace.site.FrenchSalutation'> and
 <class 'antidote_book.replace.megastore_plugins.salutation.DefaultSalutation'>
 ```
 
@@ -65,7 +65,7 @@ class SiteGreeting(DefaultGreeting):
     salutation: str = "Bonjour"
 ```
 
-We changed just the first line, saying that this *implementation* should "override" the one at `DefaultSalutation`.
+We changed just the first line, saying that this _implementation_ should "override" the one at `DefaultSalutation`.
 With this in place, our tests now run correctly.
 
 Good, right?
@@ -74,11 +74,11 @@ Good, right?
 
 Alas, this approach is really tied to the choice of implementation.
 
-We'd like our `site` to just think about kinds-of-things, i.e. *interfaces*.
+We'd like our `site` to just think about kinds-of-things, i.e. _interfaces_.
 It shouldn't have to do the extra work to go find the implementation it wants to override.
 
 Fortunately Antidote has a better approach, [using `by_default`](https://antidote.readthedocs.io/en/stable/recipes/interface.html#default).
-We'll change the `Salutation` plugin to indicate that `DefaultSalutation` should *only* be used if nothing else is provided.
+We'll change the `Salutation` plugin to indicate that `DefaultSalutation` should _only_ be used if nothing else is provided.
 
 ```{literalinclude} ../../src/antidote_book/replace/megastore_plugins/salutation/__init__.py
 ---
@@ -100,8 +100,8 @@ emphasize-lines: 1
 
 The tests pass, `mypy` is still happy, and this change had a better "balance of work":
 
-- The *consumer* in `site.py` had to know less and do less
-- The *provider* in the plugin was more explicit in saying "register this as the default `Salutation`"
+- The _consumer_ in `site.py` had to know less and do less
+- The _provider_ in the plugin was more explicit in saying "register this as the default `Salutation`"
 
 Also, any software that uses `Salutation` will get the site's custom salutation.
 This is really nice for large ecosystems with lots of plugin authors.
