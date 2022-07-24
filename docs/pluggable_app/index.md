@@ -17,18 +17,13 @@ As you go through these sections, keep in mind some of the tenets we're advocati
 
 Next
 
-- Replaceable parts with `@interface`
-- Replacing a built-in with `@override`
-- debugging_antidote_apps
-- Providing a fallback with `.by_default`
-  - And `implements.overriding`
 - Varying lookup with qualifiers
-- Replaceable specs with protocols
+- debugging_antidote_apps
 - (new) Smaller surface areas with operators
-- Per-transaction data from scopes
-- Injection from scope
+- Per-transaction data from scopes with injection from scope
 - Convenient plugs with decorators
 - Best-match with predicates
+- (MAYBE) Start refactoring as generic view/resource/request/response system
 
 ```{toctree}
 ---

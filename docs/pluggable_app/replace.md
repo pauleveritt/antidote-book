@@ -1,60 +1,107 @@
-# Replace
+# Replacing Built-In Implementations
 
-Instead of a library, we now have "pluggable app" framework.
-It provides interconnected injectables and calls things.
+We now have a pluggable app which defines key pieces -- `Customer`, `Greeter`, etc. -- via interfaces.
+The app ships with implementations of these, but what if we want to _replace_ them with a site-local implementation?
 
-MegaStore provides, out-of-the-box (OOTB), a `Greeting` via a bundled plugin.
-Let's show how the site can override this without having to fork the built-in `Greeting` nor any callers.
+Let's show how a site can implement its own `Salutation` -- without forking the plugin's implementation.
+Also, without making all the existing code point to our site's `Salutation`.
+Everybody will just start getting the overridden one, without even knowing it was added!
 
-- Back out of the salutation change in extend
-- Start with a testing change
-- Change the plugin to declare its `DefaultGreeting` as the...default.
-- Link to the docs for this
-- Change `site.py` to provide a new implementation
-- Test runs
-- Mention override
+# Replacing with `override`
 
-The pluggable app in `framework.py` provides built-in implementations for `Greeter` and `Greeting`:
+MegaStore has opened a store in Quebec, so the salutations in `DefaultSalutation.choices` should be in French.
+The *site* can override this without having to fork the built-in `DefaultSalutation` nor any callers.
 
-```{literalinclude} framework.py
+We'll start, of course, with a failing test.
+Let's change `test_greeting` and `test_main` to use the French salutations:
 
+```{literalinclude} ../../tests/test_replace.py
+---
+start-at: "def test_greeting"
+emphasize-lines: 7, 14-15
+---
 ```
 
-Our "site" installs this framework package but wants to use a different `Greeter`.
-We do this by registering our own implementation, using `@implements`:
+When we run our tests, we see that they failed, which is good.
 
-```{literalinclude} __init__.py
+Now we start the implementation with a _wrong_ approach.
+In `site.py`, let's add a `FrenchSalutation` that implements the `Salutation` interface:
 
+```python
+@implements(Salutation)
+@dataclass
+class FrenchSalutation(DefaultSalutation):
+    """A salutation for a Quebec store."""
+
+    choices: tuple[str, ...] = ("Bonjour", "Bon après-midi")
 ```
 
-## Analysis
+This is pretty nice -- the existing `DefaultSalutation.__call__` doesn't have to change, so we can subclass `DefaultSalutation` to re-use it.
+Also, we said via `@implements` that `FrenchSalutation` can be used as a `Salutation`.
+All good, right?
 
-Lots going on here.
-But it's the beginning of using Antidote for pluggable systems, where multiple implementation classes might exist for the same injectable.
+Wrong!
+When we start up the application -- for example, by running our test -- we get an error from Antidote:
 
-In this case we have a concept of a `Greeter`.
-In `framework.py` this is represented by an interface -- that is, `@interface` registers the idea of a `Greeter` in the Antidote `world`.
-There's nothing (currently) special about it -- just make a class (so it can be a type).
-The class could just have `pass` with no members.
+```
+RuntimeError: Multiple implementations match the interface 
+<class 'antidote_book.replace.megastore_plugins.salutation.Salutation'> for the constraints []: 
+<class 'antidote_book.replace.site.FrenchSalutation'> and 
+<class 'antidote_book.replace.megastore_plugins.salutation.DefaultSalutation'>
+```
 
-Once you this `Greeter` concept -- an "interface" -- you can then provide implementations for it that Antidote will choose from.
-The "framework" provides one in a `DefaultGreeter` class.
-It's important for the implementation to subclass from `Greeter`, so it will be a subtype.
-Otherwise, Antidote will raise an import-time error.
-TODO Even better, `mypy` will warn you during static analysis.
+Now _that's_ a specific exception!
+It tells us exactly the problem: the new `@implements` in `site.py` matches the bundled one in the plugin.
+Meaning, there are now two classes fighting to be the One True `Salutation`.
 
-It's the line above the class that does the magic.
-`@implements` is a way to say "this class is an implmentation of that interface."
-This statement is done in a way compatible with Python static type checking (which isn't easy), while also flexible.
-You use the `.when()` clause to say in which cases Antidote should choose this implementation.
+The first solution to this is to use [Antidote's `overriding` support](https://antidote.readthedocs.io/en/stable/recipes/interface.html#overriding):
 
-The conditions for a `.when()` are known as "predicates".
-They are extensible.
-In this case, we wrote our own, but it's likely the "overrides" pattern is common enough that Antidote will bundle its own.
+```python
+@implements(Salutation).overriding(DefaultSalutation)
+@dataclass
+class SiteGreeting(DefaultGreeting):
+    """A FrenchGreeting for a French store."""
 
-With that in place, our little pluggable app has an overridable `Greeter`.
-Our usage in `__init__.py` simply has to say `@implements(Greeter)` and `SiteGreeter` "overrides" the `DefaultGreeter`.
+    salutation: str = "Bonjour"
+```
 
-At runtime, we call `greeting()` which is bundled with the framework.
-It depends on `Greeting`, but we don't have to fork it to point at our new `SiteGreeter`.
-This is a powerful and useful concept for building pluggable apps.
+We changed just the first line, saying that this *implementation* should "override" the one at `DefaultSalutation`.
+With this in place, our tests now run correctly.
+
+Good, right?
+
+## Setting a `.by_default` Implementation
+
+Alas, this approach is really tied to the choice of implementation.
+
+We'd like our `site` to just think about kinds-of-things, i.e. *interfaces*.
+It shouldn't have to do the extra work to go find the implementation it wants to override.
+
+Fortunately Antidote has a better approach, [using `by_default`](https://antidote.readthedocs.io/en/stable/recipes/interface.html#default).
+We'll change the `Salutation` plugin to indicate that `DefaultSalutation` should *only* be used if nothing else is provided.
+
+```{literalinclude} ../../src/antidote_book/replace/megastore_plugins/salutation/__init__.py
+---
+start-at: "@implements(Salutation)"
+end-at: class DefaultSalutation
+emphasize-lines: 1
+---
+```
+
+Now our customized `FrenchSalutation` in `site.py` has a simpler `@implements`:
+
+```{literalinclude} ../../src/antidote_book/replace/site.py
+---
+start-at: "@implements(Salutation)"
+end-at: class FrenchSalutation
+emphasize-lines: 1
+---
+```
+
+The tests pass, `mypy` is still happy, and this change had a better "balance of work":
+
+- The *consumer* in `site.py` had to know less and do less
+- The *provider* in the plugin was more explicit in saying "register this as the default `Salutation`"
+
+Also, any software that uses `Salutation` will get the site's custom salutation.
+This is really nice for large ecosystems with lots of plugin authors.

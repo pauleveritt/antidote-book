@@ -29,4 +29,6 @@ But if you don't, you're no longer a "type of" `Greeter` and Antidote gets made 
 With protocols, we're using structural typing and `FrenchGreeter` doesn't have to be a "type of" `Greeter`.
 It just needs to be something that can be used the same as `Greeter`.
 
-Full code: {download}`__init__.py`, {download}`framework.py`, and {download}`test_protocols.py`.
+## Downloads
+
+TODO

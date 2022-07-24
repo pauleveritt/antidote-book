@@ -9,7 +9,14 @@ from antidote_book.replace.megastore_plugins.config import MegaStoreConfig
 from antidote_book.replace.megastore_plugins.customer import Customer
 from antidote_book.replace.megastore_plugins.greeter import Greeter
 from antidote_book.replace.megastore_plugins.greeting import Greeting
+from antidote_book.replace.megastore_plugins.salutation import DefaultSalutation
 from antidote_book.replace.site import main
+
+
+def test_default_salutation_str() -> None:
+    """Make a DefaultSalutation and check its str representation."""
+    salutation = DefaultSalutation()
+    assert str(salutation) in ["Good morning", "Good afternoon"]
 
 
 def test_config() -> None:
@@ -41,10 +48,13 @@ def test_greeting() -> None:
     assert greeting.customer.name == "Steve"
     assert greeting.greeter.name == "Susie"
     assert greeting.punctuation == "!"
-    assert greeting.salutation == "Hello"
+    assert str(greeting.salutation) in ["Bonjour", "Bon après-midi"]
 
 
 def test_main() -> None:
     """Let the pluggable app get our greeting."""
     result = main()
-    assert result == "Hello, my name is Susie!"
+    assert result in [
+        "Bonjour, my name is Susie!",
+        "Bon après-midi, my name is Susie!",
+    ]
