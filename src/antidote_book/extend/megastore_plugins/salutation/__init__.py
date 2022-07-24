@@ -3,7 +3,8 @@ from dataclasses import dataclass
 from datetime import datetime
 from typing import Protocol
 
-from antidote import interface, implements
+from antidote import implements
+from antidote import interface
 
 
 @interface
@@ -22,7 +23,6 @@ class DefaultSalutation:
 
     def __str__(self) -> str:
         """Different greeting based on time of day."""
-
         current_time = datetime.now()
         hour = current_time.hour
         return "Good morning" if hour < 12 else "Good afternoon"

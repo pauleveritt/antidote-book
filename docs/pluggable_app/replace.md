@@ -6,6 +6,7 @@ It provides interconnected injectables and calls things.
 MegaStore provides, out-of-the-box (OOTB), a `Greeting` via a bundled plugin.
 Let's show how the site can override this without having to fork the built-in `Greeting` nor any callers.
 
+- Back out of the salutation change in extend
 - Start with a testing change
 - Change the plugin to declare its `DefaultGreeting` as the...default.
 - Link to the docs for this
