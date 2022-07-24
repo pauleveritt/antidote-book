@@ -39,5 +39,7 @@ maxdepth: 1
 app_layout
 interfaces
 protocols
+extend
+replace
 debugging_antidote_apps
 ```

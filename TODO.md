@@ -20,6 +20,7 @@
 ## Later
 
 - Clean out top README
+- Emphasize PyCharm screenshots and mypy results
 - Clean out unused top-level docs
 - Add ref targets in Antidote Sphinx docs
 

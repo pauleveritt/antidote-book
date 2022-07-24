@@ -1,6 +1,7 @@
 # Protocols
 
 Notes:
+
 - Show the mypy error, discuss all the edge cases
 - Need to use `cast` when working with the world directly
 - TODO introduce runtime checking

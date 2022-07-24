@@ -1,15 +1,22 @@
-"""Do the shallow and deep tests for the protocols example."""
+"""Do the shallow and deep tests for the 'extend' example."""
 from typing import Type
 from typing import cast
 
 from antidote import inject
 from antidote import world
 
-from antidote_book.protocols.megastore_plugins.config import MegaStoreConfig
-from antidote_book.protocols.megastore_plugins.customer import Customer
-from antidote_book.protocols.megastore_plugins.greeter import Greeter
-from antidote_book.protocols.megastore_plugins.greeting import Greeting
-from antidote_book.protocols.site import main
+from antidote_book.extend.megastore_plugins.config import MegaStoreConfig
+from antidote_book.extend.megastore_plugins.customer import Customer
+from antidote_book.extend.megastore_plugins.greeter import Greeter
+from antidote_book.extend.megastore_plugins.greeting import Greeting
+from antidote_book.extend.megastore_plugins.salutation import DefaultSalutation
+from antidote_book.extend.site import main
+
+
+def test_default_salutation_str() -> None:
+    """Make a DefaultSalutation and check its str representation."""
+    salutation = DefaultSalutation()
+    assert str(salutation) in ["Good morning", "Good afternoon"]
 
 
 def test_config() -> None:
@@ -41,10 +48,13 @@ def test_greeting() -> None:
     assert greeting.customer.name == "Steve"
     assert greeting.greeter.name == "Susie"
     assert greeting.punctuation == "!"
-    assert greeting.salutation == "Hello"
+    assert str(greeting.salutation) in ["Good morning", "Good afternoon"]
 
 
 def test_main() -> None:
     """Let the pluggable app get our greeting."""
     result = main()
-    assert result == "Hello, my name is Susie!"
+    assert result in [
+        "Good morning, my name is Susie!",
+        "Good afternoon, my name is Susie!",
+    ]
