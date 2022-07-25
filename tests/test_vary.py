@@ -7,16 +7,11 @@ from antidote import world
 
 from antidote_book.vary.megastore_plugins.config import MegaStoreConfig
 from antidote_book.vary.megastore_plugins.customer import Customer
+from antidote_book.vary.megastore_plugins.customer import DefaultCustomer
+from antidote_book.vary.megastore_plugins.customer import FrenchCustomer
 from antidote_book.vary.megastore_plugins.greeter import Greeter
 from antidote_book.vary.megastore_plugins.greeting import Greeting
-from antidote_book.vary.megastore_plugins.salutation import DefaultSalutation
 from antidote_book.vary.site import main
-
-
-def test_default_salutation_str() -> None:
-    """Make a DefaultSalutation and check its str representation."""
-    salutation = DefaultSalutation()
-    assert str(salutation) in ["Good morning", "Good afternoon"]
 
 
 def test_config() -> None:
@@ -36,27 +31,47 @@ def test_customer() -> None:
     assert customer.name == "Steve"
 
 
-def test_greeter() -> None:
+def test_default_greeter() -> None:
     """Ensure the world can make a ``Greeter`` from dependencies."""
-    greeter = world.get(cast(Type[Greeter], Greeter))
+    greeter = world.get[cast(Type[Greeter], Greeter)].single(
+        qualified_by=DefaultCustomer
+    )
     assert greeter.name == "Susie"
+
+
+def test_french_greeter() -> None:
+    """Ensure the world can make a ``Greeter`` from dependencies."""
+    greeter = world.get[cast(Type[Greeter], Greeter)].single(
+        qualified_by=FrenchCustomer
+    )
+    assert greeter.name == "Marie"
 
 
 def test_default_greeting() -> None:
     """Ensure the world can make a ``Greeting`` from dependencies."""
-    greeting = world.get(cast(Type[Greeting], Greeting))
+    greeting = world.get[cast(Type[Greeting], Greeting)].single(
+        qualified_by=DefaultCustomer
+    )
     assert greeting.customer.name == "Steve"
     assert greeting.greeter.name == "Susie"
     assert greeting.punctuation == "!"
-    assert str(greeting.salutation) in ["Bonjour", "Bon après-midi"]
+    assert str(greeting.salutation) == "Hello"
+    assert greeting() == "Hello, my name is Susie!"
+
+
+def test_french_greeting() -> None:
+    """Ensure the world can make a ``FrenchGreeting`` from dependencies."""
+    greeting = world.get[cast(Type[Greeting], Greeting)].single(
+        qualified_by=FrenchCustomer
+    )
+    assert greeting.customer.name == "Steve"
+    assert greeting.greeter.name == "Marie"
+    assert greeting.punctuation == "!"
+    assert str(greeting.salutation) == "Bonjour"
+    assert greeting() == "Bonjour, je m'appelle Marie!"
 
 
 def test_main() -> None:
     """Let the pluggable app get our greeting."""
     result = main()
-    assert result in [
-        "Good morning, my name is Susie!",
-        "Bonjour, je m'appelle Marie!",
-        "Good afternoon, my name is Susie!",
-        "Bon après-midi, je m'appelle Marie!",
-    ]
+    assert result == "Hello, my name is Susie!"

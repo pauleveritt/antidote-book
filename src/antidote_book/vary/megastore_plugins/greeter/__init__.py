@@ -5,6 +5,9 @@ from typing import Protocol
 from antidote import implements
 from antidote import interface
 
+from ..customer import DefaultCustomer
+from ..customer import FrenchCustomer
+
 
 @interface
 class Greeter(Protocol):
@@ -13,9 +16,17 @@ class Greeter(Protocol):
     name: str
 
 
-@implements(Greeter)
+@implements(Greeter).when(qualified_by=DefaultCustomer)
 @dataclass
 class DefaultGreeter:
-    """A person that gives a greeting."""
+    """A person that gives a default greeting."""
 
     name: str = "Susie"
+
+
+@implements(Greeter).when(qualified_by=FrenchCustomer)
+@dataclass
+class FrenchGreeter:
+    """A French person that gives a greeting."""
+
+    name: str = "Marie"

@@ -19,3 +19,10 @@ class DefaultCustomer:
     """Default implementation of a customer."""
 
     name: str = "Steve"
+
+
+@dataclass
+class FrenchCustomer:
+    """Default implementation of a French customer."""
+
+    name: str = "Jean"
