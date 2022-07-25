@@ -21,6 +21,7 @@
 
 ## Later
 
+- Start each chapter with a context-free example done with a doctest
 - Clean out top README
 - Emphasize PyCharm screenshots and mypy results
 - Clean out unused top-level docs

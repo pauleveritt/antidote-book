@@ -17,10 +17,10 @@ As you go through these sections, keep in mind some of the tenets we're advocati
 
 Next
 
-- Context matching with
-- Per-transaction data from scopes with injection from scope
 - Best-match with predicates
+- Per-transaction data from scopes with injection from scope
 - Convenient plugs with decorators
+- Context matching with
 - (new) Smaller surface areas with operators
 - (MAYBE) Start refactoring as generic view/resource/request/response system
 
@@ -36,4 +36,6 @@ protocols
 extend
 replace
 vary
+simple_predicates
+scope
 ```
