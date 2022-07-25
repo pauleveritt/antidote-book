@@ -1,6 +1,8 @@
 """The message given by a Greeter to a Customer."""
 from dataclasses import dataclass
 from typing import Protocol
+from typing import Type
+from typing import cast
 
 from antidote import implements
 from antidote import inject
@@ -23,6 +25,9 @@ class Greeting(Protocol):
     def __call__(self) -> str:
         """Definition of the call method."""
         ...
+
+
+GreetingT = cast(Type[Greeting], Greeting)
 
 
 @implements(Greeting)

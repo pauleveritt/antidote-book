@@ -3,7 +3,7 @@
 Notes:
 
 - Show the mypy error, discuss all the edge cases
-- Need to use `cast` when working with the world directly
+- Need to use `cast` when working with the world directly, so define some cast
 - TODO introduce runtime checking
 
 ## Previous

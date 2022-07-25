@@ -1,14 +1,12 @@
 """Do the shallow and deep tests for the `replace` example."""
-from typing import Type
-from typing import cast
 
 from antidote import inject
 from antidote import world
 
 from antidote_book.replace.megastore_plugins.config import MegaStoreConfig
-from antidote_book.replace.megastore_plugins.customer import Customer
-from antidote_book.replace.megastore_plugins.greeter import Greeter
-from antidote_book.replace.megastore_plugins.greeting import Greeting
+from antidote_book.replace.megastore_plugins.customer import CustomerT
+from antidote_book.replace.megastore_plugins.greeter import GreeterT
+from antidote_book.replace.megastore_plugins.greeting import GreetingT
 from antidote_book.replace.megastore_plugins.salutation import DefaultSalutation
 from antidote_book.replace.site import main
 
@@ -32,19 +30,19 @@ def test_config() -> None:
 
 def test_customer() -> None:
     """Ensure the world can make a ``Customer`` from dependencies."""
-    customer = world.get(cast(Type[Customer], Customer))
+    customer = world.get(CustomerT)
     assert customer.name == "Steve"
 
 
 def test_greeter() -> None:
     """Ensure the world can make a ``Greeter`` from dependencies."""
-    greeter = world.get(cast(Type[Greeter], Greeter))
+    greeter = world.get(GreeterT)
     assert greeter.name == "Susie"
 
 
 def test_greeting() -> None:
     """Ensure the world can make a ``Greeting`` from dependencies."""
-    greeting = world.get(cast(Type[Greeting], Greeting))
+    greeting = world.get(GreetingT)
     assert greeting.customer.name == "Steve"
     assert greeting.greeter.name == "Susie"
     assert greeting.punctuation == "!"

@@ -1,13 +1,11 @@
 """Do the shallow and deep tests for the `noqual` example."""
-from typing import Type
-from typing import cast
 
 from antidote import inject
 from antidote import world
 
 from antidote_book.noqual.megastore.predicates import NotQualified
 from antidote_book.noqual.megastore_plugins.config import MegaStoreConfig
-from antidote_book.noqual.megastore_plugins.customer import Customer
+from antidote_book.noqual.megastore_plugins.customer import CustomerT
 from antidote_book.noqual.megastore_plugins.customer import FrenchCustomer
 from antidote_book.noqual.megastore_plugins.greeter import GreeterT
 from antidote_book.noqual.megastore_plugins.greeting import GreetingT
@@ -27,7 +25,7 @@ def test_config() -> None:
 
 def test_customer() -> None:
     """Ensure the world can make a ``Customer`` from dependencies."""
-    customer = world.get(cast(Type[Customer], Customer))
+    customer = world.get(CustomerT)
     assert customer.name == "Steve"
 
 

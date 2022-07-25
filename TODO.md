@@ -30,3 +30,4 @@
 
 - Organize outline
 - Decide on the `main` and `test` function ideas
+- GreeterT when cast appears
