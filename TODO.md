@@ -7,10 +7,12 @@
 
 ## Next
 
+- Move get_greeting to Greeting plugin
 - Write good docstrings
 
 ## Soon
 
+- Move the cast thing to a top-level "const" and re-use
 - Get preface type chapters in place
 - Consider mixing in some doctest
 - Setup api docs and make good docstrings

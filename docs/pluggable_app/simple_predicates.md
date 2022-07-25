@@ -12,3 +12,5 @@ Let's use the Antidote concept of "predicates" to simplify this with a `NoQualif
 
 - Go to test_default_greeter
   - Change to just world.get, fails
+- megastore/**init**
+  - Add noqual

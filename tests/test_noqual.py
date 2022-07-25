@@ -5,12 +5,12 @@ from typing import cast
 from antidote import inject
 from antidote import world
 
+from antidote_book.noqual.megastore.predicates import NotQualified
 from antidote_book.noqual.megastore_plugins.config import MegaStoreConfig
 from antidote_book.noqual.megastore_plugins.customer import Customer
-from antidote_book.noqual.megastore_plugins.customer import DefaultCustomer
 from antidote_book.noqual.megastore_plugins.customer import FrenchCustomer
-from antidote_book.noqual.megastore_plugins.greeter import Greeter
-from antidote_book.noqual.megastore_plugins.greeting import Greeting
+from antidote_book.noqual.megastore_plugins.greeter import GreeterT
+from antidote_book.noqual.megastore_plugins.greeting import GreetingT
 from antidote_book.noqual.site import main
 
 
@@ -33,25 +33,19 @@ def test_customer() -> None:
 
 def test_default_greeter() -> None:
     """Ensure the world can make a ``Greeter`` from dependencies."""
-    greeter = world.get[cast(Type[Greeter], Greeter)].single(
-        qualified_by=DefaultCustomer
-    )
+    greeter = world.get[GreeterT].single(NotQualified())
     assert greeter.name == "Susie"
 
 
 def test_french_greeter() -> None:
     """Ensure the world can make a ``Greeter`` from dependencies."""
-    greeter = world.get[cast(Type[Greeter], Greeter)].single(
-        qualified_by=FrenchCustomer
-    )
+    greeter = world.get[GreeterT].single(qualified_by=FrenchCustomer)
     assert greeter.name == "Marie"
 
 
 def test_default_greeting() -> None:
     """Ensure the world can make a ``Greeting`` from dependencies."""
-    greeting = world.get[cast(Type[Greeting], Greeting)].single(
-        qualified_by=DefaultCustomer
-    )
+    greeting = world.get[GreetingT].single(NotQualified())
     assert greeting.customer.name == "Steve"
     assert greeting.greeter.name == "Susie"
     assert greeting.punctuation == "!"
@@ -61,9 +55,7 @@ def test_default_greeting() -> None:
 
 def test_french_greeting() -> None:
     """Ensure the world can make a ``FrenchGreeting`` from dependencies."""
-    greeting = world.get[cast(Type[Greeting], Greeting)].single(
-        qualified_by=FrenchCustomer
-    )
+    greeting = world.get[GreetingT].single(qualified_by=FrenchCustomer)
     assert greeting.customer.name == "Steve"
     assert greeting.greeter.name == "Marie"
     assert greeting.punctuation == "!"

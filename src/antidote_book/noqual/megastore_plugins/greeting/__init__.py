@@ -1,15 +1,17 @@
 """The message given by a Greeter to a Customer."""
 from dataclasses import dataclass
 from typing import Protocol
+from typing import Type
+from typing import cast
 
 from antidote import implements
 from antidote import inject
 from antidote import injectable
 from antidote import interface
 
+from ...megastore.predicates import NotQualified
 from ..config import MegaStoreConfig
 from ..customer import Customer
-from ..customer import DefaultCustomer
 from ..customer import FrenchCustomer
 from ..greeter import Greeter
 
@@ -28,14 +30,17 @@ class Greeting(Protocol):
         ...
 
 
-@implements(Greeting).when(qualified_by=DefaultCustomer)
+GreetingT = cast(Type[Greeting], Greeting)
+
+
+@implements(Greeting)
 @injectable
 @dataclass
 class DefaultGreeting:
     """The message given to a customer."""
 
     customer: Customer = inject.me()
-    greeter: Greeter = inject.me(qualified_by=DefaultCustomer)
+    greeter: Greeter = inject.me(NotQualified())
     punctuation: str = MegaStoreConfig.PUNCTUATION
     salutation: str = "Hello"
 

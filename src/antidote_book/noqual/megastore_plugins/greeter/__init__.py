@@ -1,11 +1,12 @@
 """A Greeter that gives a Greeting to a Customer."""
 from dataclasses import dataclass
 from typing import Protocol
+from typing import Type
+from typing import cast
 
 from antidote import implements
 from antidote import interface
 
-from ..customer import DefaultCustomer
 from ..customer import FrenchCustomer
 
 
@@ -16,7 +17,10 @@ class Greeter(Protocol):
     name: str
 
 
-@implements(Greeter).when(qualified_by=DefaultCustomer)
+GreeterT = cast(Type[Greeter], Greeter)
+
+
+@implements(Greeter)
 @dataclass
 class DefaultGreeter:
     """A person that gives a default greeting."""
