@@ -17,9 +17,8 @@ As you go through these sections, keep in mind some of the tenets we're advocati
 
 Next
 
-- Varying lookup with qualifiers
+- Context matching with
 - Per-transaction data from scopes with injection from scope
-- debugging_antidote_apps
 - Best-match with predicates
 - Convenient plugs with decorators
 - (new) Smaller surface areas with operators
@@ -37,5 +36,4 @@ protocols
 extend
 replace
 vary
-debugging_antidote_apps
 ```
