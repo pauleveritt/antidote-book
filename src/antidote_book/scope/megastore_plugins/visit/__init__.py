@@ -24,7 +24,8 @@ class VisitHandler:
 
     def __call__(self) -> Visit:
         """Give Antidote access to the current visit value."""
-        assert self.__visit is not None
+        if self.__visit is None:
+            raise ValueError("VisitHandler needs a customer.")
         return self.__visit
 
     def set_customer_id(self, value: str) -> None:

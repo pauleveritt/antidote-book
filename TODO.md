@@ -6,6 +6,7 @@
 
 ## Next
 
+- Get coverage up
 - Sybil etc. for docstring-based storytelling
 - Move get_greeting to Greeting plugin
 - Write good docstrings
