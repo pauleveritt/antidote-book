@@ -1,4 +1,6 @@
 """A Customer that receives a Greeting from a Greeter."""
+from __future__ import annotations
+
 from dataclasses import dataclass
 from typing import Protocol
 from typing import Type
@@ -31,3 +33,9 @@ class FrenchCustomer:
     """Default implementation of a French customer."""
 
     name: str = "Jean"
+
+
+ALL_CUSTOMERS: dict[str, Customer] = dict(
+    steve=DefaultCustomer(name="Steve"),
+    jean=FrenchCustomer(name="Jean"),
+)

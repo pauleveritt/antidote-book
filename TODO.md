@@ -9,9 +9,15 @@
 
 - Move get_greeting to Greeting plugin
 - Write good docstrings
+- Get "Hello Kevin, my name is" customer.name in earlier
 
 ## Soon
 
+- Re-invent test writing to provide alternates passed in for injection
+  - Rather than use a world all the time
+  - Have a local function in the test
+    - Which has an assert itself
+- More comments on included code
 - Move the cast thing to a top-level "const" and re-use
 - Get preface type chapters in place
 - Consider mixing in some doctest

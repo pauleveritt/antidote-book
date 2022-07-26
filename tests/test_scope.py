@@ -9,6 +9,7 @@ from antidote_book.scope.megastore_plugins.customer import CustomerT
 from antidote_book.scope.megastore_plugins.customer import FrenchCustomer
 from antidote_book.scope.megastore_plugins.greeter import GreeterT
 from antidote_book.scope.megastore_plugins.greeting import GreetingT
+from antidote_book.scope.megastore_plugins.visit import VisitHandler
 from antidote_book.scope.site import main
 
 
@@ -43,25 +44,31 @@ def test_french_greeter() -> None:
 
 def test_default_greeting() -> None:
     """Ensure the world can make a ``Greeting`` from dependencies."""
+    # Set the scope
+    visit_handler = world.get(VisitHandler)
+    visit_handler.set_customer_id("steve")
     greeting = world.get[GreetingT].single(NotQualified())
     assert greeting.customer.name == "Steve"
     assert greeting.greeter.name == "Susie"
     assert greeting.punctuation == "!"
     assert str(greeting.salutation) == "Hello"
-    assert greeting() == "Hello, my name is Susie!"
+    assert greeting() == "Hello Steve, my name is Susie!"
 
 
 def test_french_greeting() -> None:
     """Ensure the world can make a ``FrenchGreeting`` from dependencies."""
+    # Set the scope
+    visit_handler = world.get(VisitHandler)
+    visit_handler.set_customer_id("jean")
     greeting = world.get[GreetingT].single(qualified_by=FrenchCustomer)
     assert greeting.customer.name == "Steve"
     assert greeting.greeter.name == "Marie"
     assert greeting.punctuation == "!"
     assert str(greeting.salutation) == "Bonjour"
-    assert greeting() == "Bonjour, je m'appelle Marie!"
+    assert greeting() == "Bonjour Jean, je m'appelle Marie!"
 
 
 def test_main() -> None:
     """Let the pluggable app get our greeting."""
     result = main()
-    assert result == "Hello, my name is Susie!"
+    assert result == "Hello Steve, my name is Susie!"

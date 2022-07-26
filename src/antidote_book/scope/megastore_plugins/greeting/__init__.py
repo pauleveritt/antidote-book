@@ -11,9 +11,12 @@ from antidote import interface
 
 from ...megastore.predicates import NotQualified
 from ..config import MegaStoreConfig
+from ..customer import ALL_CUSTOMERS
 from ..customer import Customer
 from ..customer import FrenchCustomer
 from ..greeter import Greeter
+from ..visit import Visit
+from ..visit import VisitHandler
 
 
 @interface
@@ -43,11 +46,13 @@ class DefaultGreeting:
     greeter: Greeter = inject.me(NotQualified())
     punctuation: str = MegaStoreConfig.PUNCTUATION
     salutation: str = "Hello"
+    visit: Visit = inject.me(source=VisitHandler)
 
     def __call__(self) -> str:
         """Give the text of the greeting."""
-        gn = self.greeter.name  # Shorten line
-        return f"{self.salutation}, my name is {gn}{self.punctuation}"
+        gn, p = self.greeter.name, self.punctuation  # Shorten line
+        customer = ALL_CUSTOMERS[self.visit.customer_id]
+        return f"{self.salutation} {customer.name}, my name is {gn}{p}"
 
 
 @implements(Greeting).when(qualified_by=FrenchCustomer)
@@ -60,8 +65,10 @@ class FrenchGreeting:
     greeter: Greeter = inject.me(qualified_by=FrenchCustomer)
     punctuation: str = MegaStoreConfig.PUNCTUATION
     salutation: str = "Bonjour"
+    visit: Visit = inject.me(source=VisitHandler)
 
     def __call__(self) -> str:
         """Give the text of the greeting."""
-        gn = self.greeter.name  # Shorten line
-        return f"{self.salutation}, je m'appelle {gn}{self.punctuation}"
+        gn, p = self.greeter.name, self.punctuation  # Shorten line
+        customer = ALL_CUSTOMERS[self.visit.customer_id]
+        return f"{self.salutation} {customer.name}, je m'appelle {gn}{p}"

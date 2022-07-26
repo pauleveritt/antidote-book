@@ -1,88 +1,33 @@
 """Represent outside data for a customer visit."""
-from dataclasses import dataclass, field
-from random import randint
-from typing import Protocol
+from dataclasses import dataclass
 
-from antidote import (
-    world,
-    inject,
-    interface,
-    implements,
-    QualifiedBy,
-    factory,
-)
+from antidote import factory
+from antidote import world
+
 
 VISIT_SCOPE = world.scopes.new(name="visit")
 
 
-@dataclass
-class Customer:
-    name: str = "Fred"
-
-
 @dataclass(frozen=True)
 class Visit:
-    customer: Customer
+    """Data used for a customer visit."""
+
+    customer_id: str
 
 
 @factory(scope=VISIT_SCOPE)
+@dataclass
 class VisitHandler:
-    def __init__(self):
-        self.__visit = None
+    """Stateful factory to represent visit data within a scope."""
+
+    __visit: Visit | None = None
 
     def __call__(self) -> Visit:
-        print("In the VisitHandler call")
+        """Give Antidote access to the current visit value."""
         assert self.__visit is not None
         return self.__visit
 
-    def set_customer(self, customer: Customer) -> None:
-        self.__visit = Visit(customer=customer)
+    def set_customer_id(self, value: str) -> None:
+        """Record the customer ID of the current visiting customer."""
+        self.__visit = Visit(customer_id=value)
         world.scopes.reset(VISIT_SCOPE)
-
-
-@interface
-class Greeter(Protocol):
-    """A way to talk about all variations of a `Greeter`."""
-
-    name: str
-    greeting: str
-
-
-@implements(Greeter).when(QualifiedBy(Customer))
-@dataclass
-class DefaultGreeter:
-    """The bundled `Greeter`."""
-
-    name: str = "Fred"
-    greeting: str = field(init=False)
-
-    def __post_init__(self):
-        marker = randint(0, 99999)
-        self.greeting = f"Hello {self.name} {marker}"
-
-
-@inject
-def greeting(visit: Visit = inject.me(source=VisitHandler)) -> str:
-    """Get a `Greeter` for a ``Customer`` and return a greeting."""
-    customer_type = visit.customer.__class__
-    greeter = world.get[Greeter].single(QualifiedBy(customer_type))
-    return greeter.greeting
-    # return f"{greeter.salutation}, my name is {greeter.name}!"
-
-
-@inject
-def handle_visit(
-    customer: Customer,
-    visit_handler: VisitHandler = inject.me(),
-) -> str:
-    """Reset scope to use current customer and return greeting."""
-    visit_handler.set_customer(customer=customer)
-    print(f"***** {greeting()}")
-    return greeting()
-
-
-if __name__ == "__main__":
-    for n in ["John", "Jill", "Marie"]:
-        c = Customer(name=n)
-        g = handle_visit(c)
-        print(g)
