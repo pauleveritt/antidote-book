@@ -2,17 +2,20 @@
 
 ## Now
 
-- Get `mypy` and `pytest-mypy` working
-- Each example module is in the api docs and can be linked to via "Files:"
+- Get rid of **init**.py for all components to ease changing files
 
 ## Next
 
+- Sybil etc. for docstring-based storytelling
 - Move get_greeting to Greeting plugin
 - Write good docstrings
 - Get "Hello Kevin, my name is" customer.name in earlier
 
 ## Soon
 
+- Fix any cut-and-paste docstring violations
+- Constantly remind people that civilians won't write this, they will consume it
+  - You're giving them well-managed, domain-specific entities
 - Re-invent test writing to provide alternates passed in for injection
   - Rather than use a world all the time
   - Have a local function in the test
@@ -27,6 +30,7 @@
 
 ## Later
 
+- Each example module is in the api docs and can be linked to via "Files:"
 - Start each chapter with a context-free example done with a doctest
 - Clean out top README
 - Emphasize PyCharm screenshots and mypy results
