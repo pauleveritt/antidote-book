@@ -25,7 +25,7 @@ We'd like a generic concept of `Greeting`, decoupled from the implementation -- 
 
 First we define the "contract" as an Antidote interface:
 
-```{literalinclude} ../../src/antidote_book/interfaces/megastore_plugins/greeting/__init__.py
+```{literalinclude} ../../src/antidote_book/interfaces/megastore_plugins/greeting.py
 ---
 start-at: "@interface"
 end-at: "return"
@@ -41,7 +41,7 @@ Strictly speaking, the `name: str` isn't enforced as part of the contract.
 Then how do we register the class used to _make_ a `Greeting`?
 Using Antidote's `@implements`:
 
-```{literalinclude} ../../src/antidote_book/interfaces/megastore_plugins/greeting/__init__.py
+```{literalinclude} ../../src/antidote_book/interfaces/megastore_plugins/greeting.py
 ---
 start-at: "@implements"
 end-at: "return f"
@@ -84,7 +84,7 @@ The `Greeting` plugin now does two things:
 Let's apply the same treatment to the other plugins (except `Config` which doesn't define an injectable).
 First, `Customer`:
 
-```{literalinclude} ../../src/antidote_book/interfaces/megastore_plugins/customer/__init__.py
+```{literalinclude} ../../src/antidote_book/interfaces/megastore_plugins/customer.py
 ---
 start-at: "@interface"
 end-at: "name: str ="
@@ -93,7 +93,7 @@ end-at: "name: str ="
 
 Next, `Greeter`:
 
-```{literalinclude} ../../src/antidote_book/interfaces/megastore_plugins/greeter/__init__.py
+```{literalinclude} ../../src/antidote_book/interfaces/megastore_plugins/greeter.py
 ---
 start-at: "@interface"
 end-at: "name: str ="

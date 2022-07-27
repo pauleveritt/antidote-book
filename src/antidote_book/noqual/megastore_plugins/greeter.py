@@ -7,7 +7,7 @@ from typing import cast
 from antidote import implements
 from antidote import interface
 
-from ..customer import FrenchCustomer
+from .customer import FrenchCustomer
 
 
 @interface

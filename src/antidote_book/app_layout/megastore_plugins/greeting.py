@@ -1,32 +1,17 @@
 """The message given by a Greeter to a Customer."""
 from dataclasses import dataclass
 
-from antidote import implements
 from antidote import inject
-from antidote import interface
+from antidote import injectable
 
-from ..config import MegaStoreConfig
-from ..customer import Customer
-from ..greeter import Greeter
-
-
-@interface
-class Greeting:
-    """A definition of a MegaStore greeting."""
-
-    customer: Customer
-    greeter: Greeter
-    punctuation: str
-    salutation: str
-
-    def __call__(self) -> str:
-        """Definition of the call method."""
-        return ""
+from .config import MegaStoreConfig
+from .customer import Customer
+from .greeter import Greeter
 
 
-@implements(Greeting)
+@injectable
 @dataclass
-class DefaultGreeting(Greeting):
+class Greeting:
     """The message given to a customer."""
 
     customer: Customer = inject.me()

@@ -8,9 +8,10 @@ from antidote import implements
 from antidote import inject
 from antidote import interface
 
-from ..config import MegaStoreConfig
-from ..customer import Customer
-from ..greeter import Greeter
+from .config import MegaStoreConfig
+from .customer import Customer
+from .greeter import Greeter
+from .salutation import Salutation
 
 
 @interface
@@ -20,7 +21,7 @@ class Greeting(Protocol):
     customer: Customer
     greeter: Greeter
     punctuation: str
-    salutation: str
+    salutation: Salutation
 
     def __call__(self) -> str:
         """Definition of the call method."""
@@ -38,7 +39,7 @@ class DefaultGreeting:
     customer: Customer = inject.me()
     greeter: Greeter = inject.me()
     punctuation: str = MegaStoreConfig.PUNCTUATION
-    salutation: str = "Hello"
+    salutation: Salutation = inject.me()
 
     def __call__(self) -> str:
         """Give the text of the greeting."""

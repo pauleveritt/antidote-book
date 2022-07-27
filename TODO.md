@@ -2,8 +2,6 @@
 
 ## Now
 
-- Get rid of **init**.py for all components to ease changing files
-
 ## Next
 
 - Sybil etc. for docstring-based storytelling
@@ -39,3 +37,4 @@
 - Decide on the `main` and `test` function ideas
 - GreeterT when cast appears
 - Move the cast thing to a top-level "const" and re-use
+- Get rid of **init**.py for all components to ease changing files

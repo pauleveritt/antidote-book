@@ -6,14 +6,12 @@ from typing import cast
 
 from antidote import implements
 from antidote import inject
-from antidote import injectable
 from antidote import interface
 
-from ...megastore.predicates import NotQualified
-from ..config import MegaStoreConfig
-from ..customer import Customer
-from ..customer import FrenchCustomer
-from ..greeter import Greeter
+from .config import MegaStoreConfig
+from .customer import Customer
+from .greeter import Greeter
+from .salutation import Salutation
 
 
 @interface
@@ -34,34 +32,16 @@ GreetingT = cast(Type[Greeting], Greeting)
 
 
 @implements(Greeting)
-@injectable
 @dataclass
 class DefaultGreeting:
     """The message given to a customer."""
 
     customer: Customer = inject.me()
-    greeter: Greeter = inject.me(NotQualified())
+    greeter: Greeter = inject.me()
     punctuation: str = MegaStoreConfig.PUNCTUATION
-    salutation: str = "Hello"
+    salutation: Salutation = inject.me()
 
     def __call__(self) -> str:
         """Give the text of the greeting."""
         gn = self.greeter.name  # Shorten line
         return f"{self.salutation}, my name is {gn}{self.punctuation}"
-
-
-@implements(Greeting).when(qualified_by=FrenchCustomer)
-@injectable
-@dataclass
-class FrenchGreeting:
-    """The message given to a French customer."""
-
-    customer: Customer = inject.me()
-    greeter: Greeter = inject.me(qualified_by=FrenchCustomer)
-    punctuation: str = MegaStoreConfig.PUNCTUATION
-    salutation: str = "Bonjour"
-
-    def __call__(self) -> str:
-        """Give the text of the greeting."""
-        gn = self.greeter.name  # Shorten line
-        return f"{self.salutation}, je m'appelle {gn}{self.punctuation}"

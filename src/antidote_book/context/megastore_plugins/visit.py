@@ -6,8 +6,8 @@ from antidote import inject
 from antidote import lazy
 from antidote import world
 
-from ..customer import ALL_CUSTOMERS
-from ..customer import Customer
+from .customer import ALL_CUSTOMERS
+from .customer import Customer
 
 
 VISIT_SCOPE = world.scopes.new(name="visit2")
