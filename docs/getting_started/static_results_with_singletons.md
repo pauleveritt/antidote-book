@@ -1,6 +1,6 @@
-# Dynamic Results without Singletons
+# Static Results with Singletons
 
-By default, `@injectable` returns a singleton.
+In Antidote v2, `@injectable` does *not* return a singleton by default.
 This means there can only be one result every produced during the lifetime of that world.
 That makes it fast!
 
@@ -9,7 +9,7 @@ For example, information in the outside world might change in a way that the Ant
 
 Let's see how to control usage of singletons.
 
-## Random Greeting
+## Random But Static Greeting
 
 We saw in [](using_dataclasses) the `Greeter` that we are injecting:
 
