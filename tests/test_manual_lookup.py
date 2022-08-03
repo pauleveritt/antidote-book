@@ -3,8 +3,6 @@ import pytest
 from antidote import world
 from antidote.core.exceptions import DependencyNotFoundError
 
-from antidote_book.manual_lookup import Greeter
-from antidote_book.manual_lookup import greeting
 from antidote_book.manual_lookup import main
 
 

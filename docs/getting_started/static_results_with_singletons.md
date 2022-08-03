@@ -1,6 +1,6 @@
 # Static Results with Singletons
 
-In Antidote v2, `@injectable` does *not* return a singleton by default.
+In Antidote v2, `@injectable` does _not_ return a singleton by default.
 This means there can only be one result every produced during the lifetime of that world.
 That makes it fast!
 
@@ -29,7 +29,7 @@ Especially, as we'll see in the chapter on `@lazy`, when the factory wraps some 
 For our case, what if the `Greeter` (mostly) randomly selected a choice of punctuation marks?
 In this case, we need `@injectable(singleton=False)`:
 
-```{literalinclude} ../../src/antidote_book/without_singletons/__init__.py
+```{literalinclude} ../../src/antidote_book/singletons/__init__.py
 ---
 start-at: "@injectable"
 end-at: "self.salutation"
@@ -41,7 +41,7 @@ In this case, the "factory" -- the `Greeter` class initializer -- randomly choos
 
 The `greeting` then injects a `Greeter`:
 
-```{literalinclude} ../../src/antidote_book/without_singletons/__init__.py
+```{literalinclude} ../../src/antidote_book/singletons/__init__.py
 ---
 start-at: "@inject"
 end-at: "greeter.salutation"
@@ -50,7 +50,7 @@ end-at: "greeter.salutation"
 
 Our simple test can then assert that the second run is different...that is, there was no singleton caching:
 
-```{literalinclude} ../../tests/test_without_singletons.py
+```{literalinclude} ../../tests/test_singletons.py
 ---
 start-at: "test_shallow"
 end-at: "assert actual"
@@ -60,7 +60,7 @@ end-at: "assert actual"
 In fact, this example shows why Antidote makes it easy to test.
 Let's look at the unit test:
 
-```{literalinclude} ../../tests/test_without_singletons.py
+```{literalinclude} ../../tests/test_singletons.py
 ---
 start-at: "test_greeting"
 end-at: "assert actual"
@@ -77,5 +77,5 @@ Remember, it isn't just the direct input dependencies, but the dependencies of t
 
 ## Download Files
 
-- {download}`without_singletons/__init__.py <../../src/antidote_book/without_singletons/__init__.py>`
-- {download}`tests/test_without_singletons.py <../../tests/test_without_singletons.py>`
+- {download}`singletons/__init__.py <../../src/antidote_book/singletons/__init__.py>`
+- {download}`tests/test_singletons.py <../../tests/test_singletons.py>`

@@ -19,7 +19,7 @@ from antidote import injectable
 PUNCTUATION: tuple[str, ...] = ("!", ".", "!!", "?", "!?", "...", "!!", "?!")
 
 
-@injectable(scope='singleton')
+@injectable(scope="singleton")
 class Greeter:
     """A person that gives a random greeting."""
 
