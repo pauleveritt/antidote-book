@@ -4,6 +4,7 @@
 
 ## Next
 
+- Get coverage up
 - Sybil etc. for docstring-based storytelling
 - Start each chapter with a context-free example done with a doctest
 - Re-invent test writing to provide alternates passed in for injection
