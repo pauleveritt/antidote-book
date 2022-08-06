@@ -82,7 +82,7 @@ We'll change the `Salutation` plugin to indicate that `DefaultSalutation` should
 
 ```{literalinclude} ../../src/antidote_book/replace/megastore_plugins/salutation.py
 ---
-start-at: "@implements(Salutation)"
+start-at: "@implements.protocol[Salutation]"
 end-at: class DefaultSalutation
 emphasize-lines: 1
 ---
@@ -92,7 +92,7 @@ Now our customized `FrenchSalutation` in `site.py` has a simpler `@implements`:
 
 ```{literalinclude} ../../src/antidote_book/replace/site.py
 ---
-start-at: "@implements(Salutation)"
+start-at: "@implements.protocol[Salutation]"
 end-at: class FrenchSalutation
 emphasize-lines: 1
 ---
