@@ -7,11 +7,12 @@ from typing import Type
 
 from antidote import QualifiedBy
 from antidote import inject
+from antidote import instanceOf
 from antidote import world
 
 from ..megastore_plugins.customer import Customer
 from ..megastore_plugins.customer import DefaultCustomer
-from ..megastore_plugins.greeting import GreetingT
+from ..megastore_plugins.greeting import Greeting
 from .predicates import NotQualified
 
 
@@ -20,7 +21,7 @@ def get_greeting(customer_type: Type[Customer] | None = None) -> str:
     """Process a greeting."""
     if customer_type is None:
         # No customer used
-        g1 = world.get[GreetingT].single(NotQualified())
+        g1 = world[instanceOf[Greeting]().single(qualified_by=NotQualified)]
     else:
-        g1 = world.get[GreetingT].single(QualifiedBy(DefaultCustomer))
+        g1 = world[instanceOf[Greeting]().single(QualifiedBy(DefaultCustomer))]
     return g1()

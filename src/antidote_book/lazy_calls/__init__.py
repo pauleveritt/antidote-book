@@ -27,7 +27,9 @@ class OutsideMessage:
 
 
 @lazy
-def outside_message(punctuation: str = Config.PUNCTUATION) -> OutsideMessage:
+def outside_message(
+    punctuation: str = inject[Config.PUNCTUATION],
+) -> OutsideMessage:
     """Register and construct an ``OutsideMessage``."""
     return OutsideMessage(punctuation=punctuation)
 
@@ -38,7 +40,7 @@ class Greeter:
     """A person that gives a greeting."""
 
     name: str = "Marie"
-    message: OutsideMessage = outside_message()
+    message: OutsideMessage = inject[outside_message()]
 
 
 @inject

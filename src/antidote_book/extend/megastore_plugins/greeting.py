@@ -1,8 +1,6 @@
 """The message given by a Greeter to a Customer."""
 from dataclasses import dataclass
 from typing import Protocol
-from typing import Type
-from typing import cast
 
 from antidote import implements
 from antidote import inject
@@ -28,17 +26,14 @@ class Greeting(Protocol):
         ...
 
 
-GreetingT = cast(Type[Greeting], Greeting)
-
-
-@implements(Greeting)
+@implements.protocol[Greeting]()
 @dataclass
 class DefaultGreeting:
     """The message given to a customer."""
 
     customer: Customer = inject.me()
     greeter: Greeter = inject.me()
-    punctuation: str = MegaStoreConfig.PUNCTUATION
+    punctuation: str = inject[MegaStoreConfig.PUNCTUATION]
     salutation: Salutation = inject.me()
 
     def __call__(self) -> str:

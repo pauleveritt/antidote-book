@@ -18,7 +18,7 @@ class Greeter(Protocol):
 GreeterT = cast(Type[Greeter], Greeter)
 
 
-@implements(Greeter)
+@implements.protocol[Greeter]()
 @dataclass
 class DefaultGreeter:
     """A person that gives a greeting."""

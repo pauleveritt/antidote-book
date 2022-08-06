@@ -10,25 +10,38 @@ isn't tracking.
 
 Let's see how to control usage of singletons.
 """
-from random import choice
-
 from antidote import inject
 from antidote import injectable
 
 
-PUNCTUATION: tuple[str, ...] = ("!", ".", "!!", "?", "!?", "...", "!!", "?!")
+GREETER_COUNT: int = 0
+COUNTING_GREETER_COUNT: int = 0
 
 
-@injectable(scope="singleton")
+@injectable
 class Greeter:
-    """A person that gives a random greeting."""
+    """A person that gives a greeting."""
 
     salutation: str
 
     def __init__(self) -> None:
-        """Make a salutation using a random choice."""
-        punctuation = choice(PUNCTUATION) + choice(PUNCTUATION)  # noqa: S311
-        self.salutation = f"Hello {punctuation}"
+        """Make a salutation with a counter."""
+        global GREETER_COUNT
+        GREETER_COUNT += 1
+        self.salutation = f"({GREETER_COUNT}): Hello!"
+
+
+@injectable(scope="call")
+class CountingGreeter:
+    """A variation that keeps a counter every time the factory runs."""
+
+    salutation: str
+
+    def __init__(self) -> None:
+        """Make a salutation with a counter."""
+        global COUNTING_GREETER_COUNT
+        COUNTING_GREETER_COUNT += 1
+        self.salutation = f"({COUNTING_GREETER_COUNT}): Hello!"
 
 
 @inject
@@ -37,11 +50,9 @@ def greeting(greeter: Greeter = inject.me()) -> str:
     return greeter.salutation
 
 
-def main() -> tuple[str, str]:
-    """Process a series of greetings with likely different results."""
-    first_multi_greeting = greeting()
-    second_multi_greeting = greeting()
-    return first_multi_greeting, second_multi_greeting
+def main() -> str:
+    """Process a greeting."""
+    return greeting()
 
 
 if __name__ == "__main__":  # pragma: no cover

@@ -13,14 +13,14 @@ hidden:
 maxdepth: 1
 ---
 
-getting_a_dependency_manually
-easy_lookup_with_injection
-faster_dev_with_tooling
+manual_lookup
+easy_injection
 using_dataclasses
-static_results_with_singletons
-configuration_with_constants
+singletons
+constants
 chained_injection
-outside_code_with_lazy
+lazy
 customized_construction
+counter_state
 stateful_factories
 ```

@@ -30,14 +30,14 @@ class Greeting(Protocol):
 GreetingT = cast(Type[Greeting], Greeting)
 
 
-@implements(Greeting)
+@implements.protocol[Greeting]()
 @dataclass
 class DefaultGreeting:
     """The message given to a customer."""
 
     customer: Customer = inject.me()
     greeter: Greeter = inject.me()
-    punctuation: str = MegaStoreConfig.PUNCTUATION
+    punctuation: str = inject[MegaStoreConfig.PUNCTUATION]
     salutation: str = "Hello"
 
     def __call__(self) -> str:

@@ -27,7 +27,7 @@ class GreeterInit:
 
     salutation: str
 
-    def __init__(self, punctuation: str = Config.PUNCTUATION) -> None:
+    def __init__(self, punctuation: str = inject[Config.PUNCTUATION]) -> None:
         """Use init injection to custom construct."""
         dow = datetime.today().strftime("%A")
         self.salutation = f"Happy {dow}{punctuation}"
@@ -38,7 +38,7 @@ class GreeterInit:
 class GreeterPostInit:
     """A person that gives a greeting using injection then post init."""
 
-    punctuation: str = Config.PUNCTUATION
+    punctuation: str = inject[Config.PUNCTUATION]
     salutation: str = field(init=False)
 
     def __post_init__(self) -> None:
@@ -55,7 +55,7 @@ class GreeterBuild:
     salutation: str
 
     @classmethod
-    def build(cls, punctuation: str = Config.PUNCTUATION) -> GreeterBuild:
+    def build(cls, punctuation: str = inject[Config.PUNCTUATION]) -> GreeterBuild:
         """Customize the creation of instances."""
         dow = datetime.today().strftime("%A")
         salutation = f"Happy {dow}{punctuation}"

@@ -10,8 +10,6 @@ This lets values be _optionally_ retrieved from dynamic sources -- in this case,
 
 The test example shows using monkeypatch to simulate putting a configuration value into the environment.
 
-```
-
 ## Analysis
 
 Your injectables will likely need configuration values from a variety of sources.
@@ -22,4 +20,3 @@ Antidote's idea of `Constants` is an interesting take on this:
 - Lazy evaluation as needed
 
 ## Download
-```

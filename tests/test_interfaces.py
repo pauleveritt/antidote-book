@@ -14,7 +14,7 @@ def test_config() -> None:
     """Ensure MegaStore has config-driven injectable punctuation."""
 
     @inject
-    def get_punctuation(punctuation: str = MegaStoreConfig.PUNCTUATION) -> str:
+    def get_punctuation(punctuation: str = inject[MegaStoreConfig.PUNCTUATION]) -> str:
         return punctuation
 
     this_punctuation = get_punctuation()
@@ -23,19 +23,19 @@ def test_config() -> None:
 
 def test_customer() -> None:
     """Ensure the world can make a ``Customer`` from dependencies."""
-    customer = world.get(Customer)
+    customer = world[Customer]
     assert customer.name == "Steve"
 
 
 def test_greeter() -> None:
     """Ensure the world can make a ``Greeter`` from dependencies."""
-    greeter = world.get(Greeter)
+    greeter = world[Greeter]
     assert greeter.name == "Susie"
 
 
 def test_greeting() -> None:
     """Ensure the world can make a ``Greeting`` from dependencies."""
-    greeting = world.get(Greeting)
+    greeting = world[Greeting]
     assert greeting.customer.name == "Steve"
     assert greeting.greeter.name == "Susie"
     assert greeting.punctuation == "!"

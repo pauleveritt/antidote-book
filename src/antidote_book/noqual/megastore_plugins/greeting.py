@@ -1,8 +1,6 @@
 """The message given by a Greeter to a Customer."""
 from dataclasses import dataclass
 from typing import Protocol
-from typing import Type
-from typing import cast
 
 from antidote import implements
 from antidote import inject
@@ -30,18 +28,15 @@ class Greeting(Protocol):
         ...
 
 
-GreetingT = cast(Type[Greeting], Greeting)
-
-
-@implements(Greeting)
+@implements.protocol[Greeting]().when(qualified_by=NotQualified)
 @injectable
 @dataclass
 class DefaultGreeting:
     """The message given to a customer."""
 
     customer: Customer = inject.me()
-    greeter: Greeter = inject.me(NotQualified())
-    punctuation: str = MegaStoreConfig.PUNCTUATION
+    greeter: Greeter = inject.me(qualified_by=NotQualified)
+    punctuation: str = inject[MegaStoreConfig.PUNCTUATION]
     salutation: str = "Hello"
 
     def __call__(self) -> str:
@@ -50,7 +45,7 @@ class DefaultGreeting:
         return f"{self.salutation}, my name is {gn}{self.punctuation}"
 
 
-@implements(Greeting).when(qualified_by=FrenchCustomer)
+@implements.protocol[Greeting]().when(qualified_by=FrenchCustomer)
 @injectable
 @dataclass
 class FrenchGreeting:
@@ -58,7 +53,7 @@ class FrenchGreeting:
 
     customer: Customer = inject.me()
     greeter: Greeter = inject.me(qualified_by=FrenchCustomer)
-    punctuation: str = MegaStoreConfig.PUNCTUATION
+    punctuation: str = inject[MegaStoreConfig.PUNCTUATION]
     salutation: str = "Bonjour"
 
     def __call__(self) -> str:

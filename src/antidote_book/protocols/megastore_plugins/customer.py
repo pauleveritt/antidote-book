@@ -18,7 +18,7 @@ class Customer(Protocol):
 CustomerT = cast(Type[Customer], Customer)
 
 
-@implements(Customer)
+@implements.protocol[Customer]()
 @dataclass
 class DefaultCustomer:
     """Default implementation of a customer."""

@@ -22,7 +22,10 @@ class Greeter:
 @inject
 def greeting(greeter: Greeter = inject.me()) -> str:
     """Get a `Greeter` and return a greeting."""
-    return f"{greeter.salutation}!"
+    if greeter:
+        return f"{greeter.salutation}!"
+    else:
+        return "No greeter available."
 
 
 def main() -> str:

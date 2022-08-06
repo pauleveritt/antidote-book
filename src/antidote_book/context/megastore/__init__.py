@@ -6,12 +6,13 @@ interfaces, entry points, and shared core logic, etc.
 
 from antidote import QualifiedBy
 from antidote import inject
+from antidote import instanceOf
 from antidote import world
 
 from ..megastore_plugins.customer import ALL_CUSTOMERS
 from ..megastore_plugins.customer import DefaultCustomer
 from ..megastore_plugins.customer import FrenchCustomer
-from ..megastore_plugins.greeting import GreetingT
+from ..megastore_plugins.greeting import Greeting
 from ..megastore_plugins.visit import VisitHandler
 from .predicates import NotQualified
 
@@ -26,7 +27,9 @@ def get_greeting(
     visit_handler.set_customer_id(customer_id)
     this_customer = ALL_CUSTOMERS[customer_id]
     if isinstance(this_customer, DefaultCustomer):
-        greeting = world.get[GreetingT].single(NotQualified())
+        greeting = world[instanceOf[Greeting]().single(qualified_by=NotQualified)]
     else:
-        greeting = world.get[GreetingT].single(QualifiedBy(FrenchCustomer))
+        greeting = world[
+            instanceOf[Greeting]().single(qualified_by=QualifiedBy(FrenchCustomer))
+        ]
     return greeting()

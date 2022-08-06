@@ -9,7 +9,7 @@ And if you're writing something to be used, extended, or changed by others -- do
 
 What if there was a way to build modular, extensible -- pluggable! -- applications from the start?
 
-"But wait," you say. 
+"But wait," you say.
 "That usually means a lot of ceremony.
 We're not here to write Java!"
 

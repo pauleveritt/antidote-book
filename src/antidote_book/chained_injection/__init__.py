@@ -1,4 +1,4 @@
-"""Multi-step dependencies are injected correctly.
+"""Multistep dependencies are injected correctly.
 
 Injection can depend on something which depends on something. Antidote
 is quite good at these "transitive dependencies". Let's take a look at
@@ -23,7 +23,7 @@ class Message:
     """The message to give in the greeting."""
 
     salutation: str = "Hello"
-    punctuation: str = Config.PUNCTUATION
+    punctuation: str = inject[Config.PUNCTUATION]
 
 
 @injectable  # inject Greeter

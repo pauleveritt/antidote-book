@@ -16,7 +16,7 @@ class Salutation(Protocol):
         ...
 
 
-@implements(Salutation)
+@implements.protocol[Salutation]()
 @dataclass
 class DefaultSalutation:
     """Give a different salutation based on time of day."""

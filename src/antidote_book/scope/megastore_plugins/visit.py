@@ -1,11 +1,8 @@
 """Represent outside data for a customer visit."""
 from dataclasses import dataclass
 
-from antidote import factory
-from antidote import world
 
-
-VISIT_SCOPE = world.scopes.new(name="visit")
+VISIT_SCOPE = None  # world.scopes.new(name="visit")
 
 
 @dataclass(frozen=True)
@@ -15,7 +12,7 @@ class Visit:
     customer_id: str
 
 
-@factory(scope=VISIT_SCOPE)
+# @factory(scope=VISIT_SCOPE)
 @dataclass
 class VisitHandler:
     """Stateful factory to represent visit data within a scope."""
@@ -31,4 +28,4 @@ class VisitHandler:
     def set_customer_id(self, value: str) -> None:
         """Record the customer ID of the current visiting customer."""
         self.__visit = Visit(customer_id=value)
-        world.scopes.reset(VISIT_SCOPE)
+        pass  # world.scopes.reset(VISIT_SCOPE)

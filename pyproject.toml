@@ -18,6 +18,7 @@ Changelog = "https://github.com/pauleveritt/antidote-book/releases"
 [tool.poetry.dependencies]
 python = "^3.7"
 click = ">=8.0.1"
+
 antidote = { git = "https://github.com/Finistere/antidote.git", branch = "v2" }
 
 

@@ -16,7 +16,7 @@ class Greeting:
 
     customer: Customer = inject.me()
     greeter: Greeter = inject.me()
-    punctuation: str = MegaStoreConfig.PUNCTUATION
+    punctuation: str = inject[MegaStoreConfig.PUNCTUATION]
     salutation: str = "Hello"
 
     def __call__(self) -> str:

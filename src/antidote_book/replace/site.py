@@ -8,7 +8,7 @@ from .megastore_plugins.salutation import DefaultSalutation
 from .megastore_plugins.salutation import Salutation
 
 
-@implements(Salutation)
+@implements.protocol[Salutation]()
 @dataclass
 class FrenchSalutation(DefaultSalutation):
     """A salutation for a Quebec store."""

@@ -28,7 +28,7 @@ class Greeter:
 @inject
 def greeting(
     greeter: Greeter = inject.me(),
-    punctuation: str = Config.PUNCTUATION,
+    punctuation: str = inject[Config.PUNCTUATION],
 ) -> str:
     """Get a `Greeter` and return greeting with configured punctuation."""
     return f"{greeter.salutation}{punctuation}"

@@ -3,8 +3,6 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from typing import Protocol
-from typing import Type
-from typing import cast
 
 from antidote import implements
 from antidote import interface
@@ -17,10 +15,7 @@ class Customer(Protocol):
     name: str
 
 
-CustomerT = cast(Type[Customer], Customer)
-
-
-@implements(Customer)
+@implements.protocol[Customer]()
 @dataclass
 class DefaultCustomer:
     """Default implementation of a customer."""

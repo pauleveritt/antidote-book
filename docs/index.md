@@ -16,7 +16,7 @@ introduction
 getting_started/index
 pluggable_app/index
 extending/index
-rendering_system/index
+components/index
 ssg/index
 License <license>
 Changelog <https://github.com/pauleveritt/antidote-book/releases>
