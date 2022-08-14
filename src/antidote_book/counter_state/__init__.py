@@ -1,15 +1,12 @@
 """Manage a counter with ``@state``."""
 from dataclasses import dataclass
 
+from antidote import ScopeVar
 from antidote import inject
 from antidote import injectable
-from antidote.core import unscoped
 
 
-@unscoped
-def counter(previous: int | None) -> int:
-    """Return and increment the counter."""
-    return (previous or 0) + 1
+counter = ScopeVar[int]()
 
 
 @injectable
@@ -31,6 +28,7 @@ def greeting(
 
 def main() -> str:
     """Process a greeting."""
+    counter.set(1)
     return greeting()
 
 
