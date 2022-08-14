@@ -31,7 +31,7 @@ In this case, we need `@injectable(scope="instance")`:
 
 ```{literalinclude} ../../src/antidote_book/singletons/__init__.py
 ---
-start-at: "@injectable(scope="
+start-at: "@injectable(lifetime="
 end-at: "self.salutation ="
 ---
 ```

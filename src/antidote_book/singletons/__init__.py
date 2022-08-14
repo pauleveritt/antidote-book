@@ -31,7 +31,7 @@ class Greeter:
         self.salutation = f"({GREETER_COUNT}): Hello!"
 
 
-@injectable(scope="call")
+@injectable(lifetime="transient")
 class CountingGreeter:
     """A variation that keeps a counter every time the factory runs."""
 

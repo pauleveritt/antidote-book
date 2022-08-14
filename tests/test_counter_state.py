@@ -19,5 +19,5 @@ def test_greeting() -> None:
     assert greeting() == "(1): Hello!"
 
     # But when you update the state, it recomputes.
-    counter.update()
+    counter.set(2)
     assert greeting() == "(2): Hello!"
