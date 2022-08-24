@@ -6,7 +6,7 @@ Let's use them for our injectables.
 
 ## Too Much Boilerplate
 
-In [](easy_lookup_with_injection) we saw a plain old class `Greeter` used as an injectable:
+In [](easy_injection) we saw a plain old class `Greeter` used as an injectable:
 
 ```{literalinclude} ../../src/antidote_book/easy_injection/__init__.py
 ---

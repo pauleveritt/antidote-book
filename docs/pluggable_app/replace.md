@@ -80,9 +80,9 @@ It shouldn't have to do the extra work to go find the implementation it wants to
 Fortunately Antidote has a better approach, [using `by_default`](https://antidote.readthedocs.io/en/stable/recipes/interface.html#default).
 We'll change the `Salutation` plugin to indicate that `DefaultSalutation` should _only_ be used if nothing else is provided.
 
-```{literalinclude} ../../src/antidote_book/replace/megastore_plugins/salutation/__init__.py
+```{literalinclude} ../../src/antidote_book/replace/megastore_plugins/salutation.py
 ---
-start-at: "@implements(Salutation)"
+start-at: "@implements.protocol[Salutation]"
 end-at: class DefaultSalutation
 emphasize-lines: 1
 ---
@@ -92,7 +92,7 @@ Now our customized `FrenchSalutation` in `site.py` has a simpler `@implements`:
 
 ```{literalinclude} ../../src/antidote_book/replace/site.py
 ---
-start-at: "@implements(Salutation)"
+start-at: "@implements.protocol[Salutation]"
 end-at: class FrenchSalutation
 emphasize-lines: 1
 ---

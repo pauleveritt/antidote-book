@@ -5,10 +5,14 @@ Not every problem has a 5 line "Hello World" solution.
 Building an application is usually great for the first five minutes.
 But the next 5 years?
 If you made your choices based on the first five minutes with a framework, you might have five years of hacks and fighting the framework ahead of you.
+And if you're writing something to be used, extended, or changed by others -- don't even get me started!
+
 What if there was a way to build modular, extensible -- pluggable! -- applications from the start?
 
-This usually means a lot of ceremony.
-We're not here to write Java!
+"But wait," you say.
+"That usually means a lot of ceremony.
+We're not here to write Java!"
+
 But as new frameworks such as FastAPI have shown, you _can_ get people to do type hinting and dependency injection, if:
 
 - The barrier is low
@@ -17,7 +21,7 @@ But as new frameworks such as FastAPI have shown, you _can_ get people to do typ
 What if there was a general-purpose framework that helped you write your own pluggable application?
 One that also had a low barrier and high payoff, but also -- some _very_ interesting possibilities.
 
-Welcome to Antidote, a modern, fast, well-supported package for dependency injection and more.
+Welcome to Antidote, a modern, fast, well-supported package for dependency injection -- and more.
 
 ## About Pluggable Apps
 

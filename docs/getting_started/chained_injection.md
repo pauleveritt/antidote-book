@@ -18,14 +18,15 @@ end-at: return f
 ---
 ```
 
-:::{note} Local Variables
+:::{admonition} Local Variables
+:class: note
 
 The local variables are only there to shorten the line for the f-string.
 :::
 
 This function has one dependency: `Greeter`.
 We're familiar with that as a `greeting` dependency.
-But... it's changed:
+But... `Greeter` has changed:
 
 ```{literalinclude} ../../src/antidote_book/chained_injection/__init__.py
 ---
@@ -37,9 +38,10 @@ emphasize-lines: 7
 
 Look at that `message` field!
 `Greeter` is an `@injectable` but it is _also_ using injection, and it isn't using it in a function signature.
-It's using injection in a dataclass field's default value.
+It's using injection in the default value of a dataclass field.
 
 This is pretty cool.
+
 We know that injection helps us get arguments when _we_ call a function such as `greeting`.
 But _we_ aren't calling `Greeter`.
 The "system" invokes that class when making an instance, and it figures out what needs to be injected.
@@ -58,7 +60,7 @@ emphasize-lines: 7
 
 Kind of the same dance.
 It's a dataclass with two fields.
-The second field brings back in our `Constant` idea from [](configuration_with_constants).
+The second field brings back in our `Constant` idea from [](constants).
 
 All in all, our `greeting` function had a dependency, which had a dependency, which had a dependency.
 And it was all kicked off with this line:
@@ -82,15 +84,18 @@ emphasize-lines: 4
 ---
 ```
 
-Let's look at our "integration" test:
+We can also test the greeting directly, passing in the value of a hand-made `Greeter` (which uses a hand-made `Message`).
+That is, we don't test injection, just test the `greeting` function's "unit":
 
 ```{literalinclude} ../../tests/test_chained_injection.py
 ---
-start-at: "def test_shallow"
+start-at: "def test_greeting"
 end-at: "assert actual"
-emphasize-lines: 4
+emphasize-lines: 5
 ---
 ```
+
+Again, from a "joy of testing" perspective, this makes it easy to test whether `greeting` does _its_ job.
 
 ## Download Files
 

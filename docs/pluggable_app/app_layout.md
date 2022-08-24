@@ -16,7 +16,7 @@ We'll approach `MegaStore` as a _thin core_ with common code that pulls everythi
 This thin core then ships with plugins for the out-of-the-box part.
 That way, the built-in stuff isn't "more equal" than an replacement parts.
 
-We'll start with a package at `megastore/__init__.py`:
+We'll start with a package at `megastore.py`:
 
 ```{literalinclude} ../../src/antidote_book/app_layout/megastore/__init__.py
 ---
@@ -41,11 +41,11 @@ All the work comes from plugins which the core looks up via Antidote.
 
 These plugins would normally be separate pip-installed packages.
 We'll put them in the `megastore_plugins` directory to simulate this.
-The first plugin we saw was used by the core, at `megastore_plugins/greeting/__init__.py`:
+The first plugin we saw was used by the core, at `megastore_plugins/greeting.py`:
 
-```{literalinclude} ../../src/antidote_book/app_layout/megastore_plugins/greeting/__init__.py
+```{literalinclude} ../../src/antidote_book/app_layout/megastore_plugins/greeting.py
 ---
-start-at: "from ..customer"
+start-at: "from .customer"
 ---
 ```
 
@@ -94,7 +94,7 @@ end-at: "assert greeting.salutation"
 As you can see, the `Greeting` plugin depends on two other plugins.
 First, the `Customer` plugin at `megastore_plugins/customer/__init__py`:
 
-```{literalinclude} ../../src/antidote_book/app_layout/megastore_plugins/customer/__init__.py
+```{literalinclude} ../../src/antidote_book/app_layout/megastore_plugins/customer.py
 ---
 start-at: "@injectable"
 ---
@@ -114,7 +114,7 @@ end-at: "assert customer.name"
 
 Same is true for the second dependency of `Greeting`, the `Greeter`:
 
-```{literalinclude} ../../src/antidote_book/app_layout/megastore_plugins/greeter/__init__.py
+```{literalinclude} ../../src/antidote_book/app_layout/megastore_plugins/greeter.py
 ---
 start-at: "@injectable"
 ---
@@ -135,7 +135,7 @@ The `MegaStore` configuration system is the final plugin.
 It provides knobs with default values, such as what punctuation to use in the greeting.
 These defaults can be overridden by a plugin or by the site:
 
-```{literalinclude} ../../src/antidote_book/app_layout/megastore_plugins/config/__init__.py
+```{literalinclude} ../../src/antidote_book/app_layout/megastore_plugins/config.py
 ---
 start-at: "class MegaStoreConfig"
 ---
@@ -188,8 +188,8 @@ Since this will be our pattern for the rest of the book, let's state again the p
 ## Download Files
 
 - {download}`app_layout/megastore/__init__.py <../../src/antidote_book/app_layout/megastore/__init__.py>`
-- {download}`app_layout/megastore_plugins/config/__init__.py <../../src/antidote_book/app_layout/megastore_plugins/config/__init__.py>`
-- {download}`app_layout/megastore_plugins/customer/__init__.py <../../src/antidote_book/app_layout/megastore_plugins/customer/__init__.py>`
-- {download}`app_layout/megastore_plugins/greeter/__init__.py <../../src/antidote_book/app_layout/megastore_plugins/greeter/__init__.py>`
-- {download}`app_layout/megastore_plugins/greeting/__init__.py <../../src/antidote_book/app_layout/megastore_plugins/greeting/__init__.py>`
+- {download}`app_layout/megastore_plugins/config.py <../../src/antidote_book/app_layout/megastore_plugins/config.py>`
+- {download}`app_layout/megastore_plugins/customer.py <../../src/antidote_book/app_layout/megastore_plugins/customer.py>`
+- {download}`app_layout/megastore_plugins/greeter.py <../../src/antidote_book/app_layout/megastore_plugins/greeter.py>`
+- {download}`app_layout/megastore_plugins/greeting.py <../../src/antidote_book/app_layout/megastore_plugins/greeting.py>`
 - {download}`tests/test_app_layout.py <../../tests/test_app_layout.py>`

@@ -20,7 +20,10 @@ class Greeter:
 def greeting() -> str:
     """Get a `Greeter` and return a greeting."""
     greeter = world.get(Greeter)
-    return f"{greeter.salutation}!"
+    if greeter:
+        return f"{greeter.salutation}!"
+    else:
+        return "No greeter available."
 
 
 def main() -> str:
