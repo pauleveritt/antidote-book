@@ -1,4 +1,4 @@
-"""Do the shallow and deep tests for the context example."""
+"""Do the shallow and deep tests for the example."""
 import pytest
 from antidote import inject
 from antidote import instanceOf
